@@ -1,0 +1,148 @@
+<div class="footer">
+    <div class="footer-content clearfix">
+        <div class="footer-content-left">
+            <div class="footer-nav">
+                <ul>
+                    <li class="footer-nav-list-item">
+                        <a href="">HOME</a>
+                    </li>
+                    <li class="footer-nav-list-item">
+                        <a href="">PRODUCTS</a>
+                    </li>
+                    <li class="footer-nav-list-item">
+                        <a href="">SERVICE</a>
+                    </li>
+                    <li class="footer-nav-list-item">
+                        <a href="">CASES</a>
+                    </li>
+                    <li class="footer-nav-list-item">
+                        <a href="">ABOUT US</a>
+                    </li>
+                    <li class="footer-nav-list-item">
+                        <a href="">GET A QUOTE</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-products">
+                <div class="footer-products-title">PRODUCTS</div>
+                <ul class="footer-products-list">
+                    <foreach name="category_list" item="vo">
+                        <li class="footer-products-item">
+                            <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}">
+                                {$vo.name}
+                                <img src="__TMPL__/public/assets/images/more.webp" alt="more">
+                            </a>
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <div class="footer-contact-title">GET A QUOTE</div>
+                <div class="footer-contact-content">
+                    <div class="footer-contact-item clearfix">
+                        <div class="footer-contact-item-icon">
+                            <img src="__TMPL__/public/assets/images/foot-email.webp" alt="email">
+                        </div>
+                        <a class="footer-contact-item-text">{$site_info.email}</a>
+                    </div>
+                    <div class="footer-contact-item clearfix">
+                        <div class="footer-contact-item-icon">
+                            <img src="__TMPL__/public/assets/images/foot-location.webp" alt="location">
+                        </div>
+                        <a class="footer-contact-item-text">{$site_info.address}</a>
+                    </div>
+                    <div class="footer-contact-item clearfix">
+                        <div class="footer-contact-item-icon">
+                            <img src="__TMPL__/public/assets/images/foot-phone.webp" alt="phone">
+                        </div>
+                        <a class="footer-contact-item-text">{$site_info.sale_tel}</a>
+                    </div>
+                    <div class="footer-contact-item clearfix">
+                        <div class="footer-contact-item-icon">
+                            <img src="__TMPL__/public/assets/images/foot-wechat.webp" alt="wechat">
+                        </div>
+                        <a class="footer-contact-item-text">{$site_info.wechat}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="clear_both"></div>
+            <div class="footer-left-line"></div>
+            <div class="footer-link">
+                <div class="footer-link-item">
+                    <a href="{$site_info.linkedin}">
+                        <img src="__TMPL__/public/assets/images/linkedin.webp" alt="linkedin">
+                    </a>
+                </div>
+                <div class="footer-link-item">
+                    <a href="{$site_info.facebook}">
+                        <img src="__TMPL__/public/assets/images/facebook.webp" alt="facebook">
+                    </a>
+                </div>
+                <div class="footer-link-item">
+                    <a href="{$site_info.youtube}">
+                        <img src="__TMPL__/public/assets/images/youtube.webp" alt="youtube">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-left-company">{$site_info.site_name|default=''}</div>
+        </div>
+        <div class="footer-content-right">
+            <div class="footer-right-title">GET IN TOUCH WITH US</div>
+            <div class="footer-feedback-item">
+                Name:
+                <input type="text" name="footer-name" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <div class="footer-feedback-item">
+                E-Mail:
+                <input type="text" name="footer-email" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <div class="footer-feedback-item">
+                Message:
+                <input type="text" name="footer-message" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <button class="footer-feedback-btn">Submit Your Request</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Floating box -->
+<div class="right_fix">
+    <div class="right_fix_connect">
+        <div class="right_fix_box right_fix_form">
+            <img src="__TMPL__/public/assets/images/floating-form.png" alt="form" title="form" data-default_img="__TMPL__/public/assets/images/floating-form.png"  data-active_img="__TMPL__/public/assets/images/floating-form-active.png">
+            <p class="right_fix_box_title">Message</p>
+        </div>
+        <div class="right_fix_box right_fix_whatsapp">
+            <a>
+                <img src="__TMPL__/public/assets/images/floating-whatsapp.png" alt="whatsapp" title="whatsapp" data-default_img="__TMPL__/public/assets/images/floating-whatsapp.png"  data-active_img="__TMPL__/public/assets/images/floating-whatsapp-active.png">
+                <p class="right_fix_box_title">WhatsApp</p>
+            </a>
+            <div class="right_fix_box_connect">
+                <p>WhatsApp:</p>
+                <p class="right_fix_box_connect_text"><a>{$site_info.whatsapp}</a></p>
+            </div>
+        </div>
+        <div class="right_fix_box right_fix_email">
+            <a href="mailto:{$site_info.email}">
+                <img src="__TMPL__/public/assets/images/floating-email.png" alt="email" title="email" data-default_img="__TMPL__/public/assets/images/floating-email.png"  data-active_img="__TMPL__/public/assets/images/floating-email-active.png">
+                <p class="right_fix_box_title">Send Email</p>
+            </a>
+            <div class="right_fix_box_connect">
+                <p>Email:</p>
+                <p class="right_fix_box_connect_text"><a onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a></p>
+            </div>
+        </div>
+        <div class="right_fix_box right_fix_wechat">
+            <img src="__TMPL__/public/assets/images/floating-wechat.png" alt="wechat" title="wechat" data-default_img="__TMPL__/public/assets/images/floating-wechat.png"  data-active_img="__TMPL__/public/assets/images/floating-wechat-active.png">
+            <p class="right_fix_box_title">Wechat</p>
+            <div class="right_fix_box_connect">
+                <p>Wechat:</p>
+                <p class="right_fix_box_connect_text">{$site_info.wechat}</p>
+            </div>
+        </div>
+    </div>
+</div>

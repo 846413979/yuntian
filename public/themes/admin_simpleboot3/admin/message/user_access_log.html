@@ -1,0 +1,29 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <form class="js-ajax-form" action="" method="post">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>IP</th>
+                <th>uri</th>
+                <th>params</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>{$vo.ip}</td>
+                    <td>{$vo.uri}</td>
+                    <td>{$vo.params}</td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <ul class="pagination">{$page|default=''}</ul>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+</body>
+</html>

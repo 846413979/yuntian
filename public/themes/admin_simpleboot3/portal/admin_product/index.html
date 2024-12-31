@@ -1,0 +1,248 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">产品列表</a></li>
+        <li><a href="{:url('AdminProduct/add')}">添加产品</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminProduct/index')}">
+        分类:
+        <select class="form-control" name="category" style="width: 140px;">
+            <option value='0'>全部</option>
+            <foreach name="category_list" item="vo">
+                <option value="{$vo.id}" <if condition="$vo['id'] eq $category">selected</if>>{$vo.name}</option>
+            </foreach>
+        </select> &nbsp;&nbsp;
+        时间:
+        <input type="text" class="form-control js-bootstrap-datetime" name="start_time"
+               value="{$start_time|default=''}"
+               style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-datetime" name="end_time"
+               value="{$end_time|default=''}"
+               style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+        关键字:
+        <input type="text" class="form-control" name="keyword" style="width: 200px;"
+               value="{$keyword|default=''}" placeholder="请输入关键字...">
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('AdminProduct/index')}">清空</a>
+    </form>
+    <form class="js-ajax-form" action="" method="post">
+        <div class="table-actions">
+            <notempty name="category">
+                <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
+                        data-action="{:url('AdminProduct/listOrder')}">{:lang('SORT')}
+                </button>
+            </notempty>
+            <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
+                    data-action="{:url('AdminProduct/recommend',array('yes'=>1))}" data-subcheck="true">推荐
+            </button>
+            <button class="btn btn-warning btn-sm js-ajax-submit" type="submit"
+                    data-action="{:url('AdminProduct/recommend',array('no'=>1))}" data-subcheck="true">取消推荐
+            </button>
+            <button class="btn btn-danger btn-sm js-ajax-submit" type="submit"
+                    data-action="{:url('AdminProduct/delete')}" data-subcheck="true" data-msg="您确定删除吗？">
+                {:lang('DELETE')}
+            </button>
+        </div>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th width="15">
+                    <input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x">
+                </th>
+                <th width="50">{:lang('SORT')}</th>
+                <th>产品名称</th>
+                <th>分类</th>
+                <th>缩略图</th>
+                <th>认证证书</th>
+                <th>起重量</th>
+                <th>起重高度</th>
+                <th>跨度</th>
+                <th>工作等级</th>
+                <th>可配吊具</th>
+                <th width="160">创建时间</th>
+                <th width="70">状态</th>
+                <th width="95">操作</th>
+            </tr>
+            </thead>
+            <foreach name="products" item="vo">
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]"
+                               value="{$vo.id}" title="ID:{$vo.id}">
+                    </td>
+                        <td>
+                            <input name="list_orders[{$vo.id}]" class="input-order" type="text"
+                                   value="{$vo.list_order}">
+                        </td>
+                    <td>
+                        <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}" target="_blank">{$vo.title}</a>
+                    </td>
+                    <td>
+                        {$vo.category.name}
+                    </td>
+                    <td>
+                        <a href="javascript:parent.imagePreviewDialog('{:cmf_get_image_preview_url($vo.thumbnail)}');">
+                            <img src="{:cmf_get_image_preview_url($vo.thumbnail)}" style="width: 30px;height: 30px;">
+                        </a>
+                    </td>
+                    <td>
+                        <notempty name="vo.authentication_mark">
+                            <foreach name="vo.authentication_mark" item="v">
+                                <span>{$v.name}</span>:<a href="javascript:parent.imagePreviewDialog('{:cmf_get_image_preview_url($v.url)}');">
+                                    <img src="{:cmf_get_image_preview_url($v.url)}" style="width: 18px;height: 18px;">&nbsp;&nbsp;&nbsp;
+                                </a>
+                            </foreach>
+                            <else/>
+                            <i class="fa fa-close fa-fw"></i>
+                        </notempty>
+                    </td>
+                    <td>
+                        <notempty name="vo.lifting_capacity">
+                            <foreach name="vo.lifting_capacity" item="v">
+                                {$v}&nbsp;&nbsp;
+                            </foreach>
+                        </notempty>
+                    </td>
+                    <td>
+                        {$vo.max_lifting_height}m
+                    </td>
+                    <td>
+                        <if condition="!empty($vo['min_span']) || !empty($vo['max_span'])">{$vo.min_span}-{$vo.max_span}m</if>
+                    </td>
+                    <td>
+                        <notempty name="vo.job_level">
+                            <foreach name="vo.job_level" item="v">
+                                {$v}&nbsp;&nbsp;
+                            </foreach>
+                        </notempty>
+                    </td>
+                    <td>
+                        <notempty name="vo.sling_available">
+                            <foreach name="vo.sling_available" item="v">
+                                <span>{$v.name}</span>:<a href="javascript:parent.imagePreviewDialog('{:cmf_get_image_preview_url($v.url)}');">
+                                <img src="{:cmf_get_image_preview_url($v.url)}" style="width: 18px;height: 18px;">&nbsp;&nbsp;&nbsp;
+                            </a>
+                            </foreach>
+                            <else/>
+                            <i class="fa fa-close fa-fw"></i>
+                        </notempty>
+                    </td>
+                    <td>
+                        <notempty name="vo.create_time">
+                            {:date('Y-m-d H:i',$vo['create_time'])}
+                        </notempty>
+                    </td>
+                    <td>
+                        <notempty name="vo.is_recommended">
+                            <a data-toggle="tooltip" title="已推荐"><i class="fa fa-thumbs-up"></i></a>
+                            <else/>
+                            <a data-toggle="tooltip" title="未推荐"><i class="fa fa-thumbs-down"></i></a>
+                        </notempty>
+                    </td>
+                    <td>
+                        <a class="btn btn-xs btn-primary"
+                           href="{:url('AdminProduct/edit',array('id'=>$vo['id']))}">{:lang('EDIT')}</a>
+                        <notempty name="vo.is_recommended">
+                            <a class="btn btn-xs btn-warning js-ajax-delete" data-msg="确定取消推荐吗？"
+                               href="{:url('AdminProduct/recommend',array('no'=>1,'id'=>$vo['id']))}">取消推荐</a>
+                            <else/>
+                            <a class="btn btn-xs btn-success js-ajax-delete" data-msg="确定推荐吗？"
+                               href="{:url('AdminProduct/recommend',array('yes'=>1,'id'=>$vo['id']))}">推荐</a>
+                        </notempty>
+                        <a class="btn btn-xs btn-danger js-ajax-delete"
+                           href="{:url('AdminProduct/delete',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
+                    </td>
+                </tr>
+            </foreach>
+        </table>
+        <ul class="pagination">{$page|default=''}</ul>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+<script>
+
+    function openPortalArticleEditDialog(obj) {
+        var $obj = $(obj);
+        var href = $obj.data('href');
+        parent.openIframeLayer(href, '编辑文章', {
+            area: GV.IS_MOBILE ? ['100%', '100%'] : ['95%', '95%'],
+            offset: GV.IS_MOBILE ? ['0px', '0px'] : 'auto',
+            // btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                console.log(layero);
+                var iframeWin = parent.window[layero.find('iframe')[0]['name']];
+                //iframeWin.confirm();
+                parent.layer.close(index); //如果设定了yes回调，需进行手工关闭
+                parent.window.location.reload();
+            },
+            end: function () {
+            }
+        });
+    }
+
+    function reloadPage(win) {
+        win.location.reload();
+    }
+
+    $(function () {
+        setCookie("refersh_time", 0);
+        Wind.use('ajaxForm', 'artDialog', 'iframeTools', function () {
+            //批量复制
+            $('.js-articles-copy').click(function (e) {
+                var ids = [];
+                $("input[name='ids[]']").each(function () {
+                    if ($(this).is(':checked')) {
+                        ids.push($(this).val());
+                    }
+                });
+
+                if (ids.length == 0) {
+                    art.dialog.through({
+                        id: 'error',
+                        icon: 'error',
+                        content: '您没有勾选信息，无法进行操作！',
+                        cancelVal: '关闭',
+                        cancel: true
+                    });
+                    return false;
+                }
+
+                ids = ids.join(',');
+                art.dialog.open("__ROOT__/index.php?g=portal&m=AdminProduct&a=copy&ids=" + ids, {
+                    title: "批量复制",
+                    width: "300px"
+                });
+            });
+            //批量移动
+            $('.js-articles-move').click(function (e) {
+                var ids = [];
+                $("input[name='ids[]']").each(function () {
+                    if ($(this).is(':checked')) {
+                        ids.push($(this).val());
+                    }
+                });
+
+                if (ids.length == 0) {
+                    art.dialog.through({
+                        id: 'error',
+                        icon: 'error',
+                        content: '您没有勾选信息，无法进行操作！',
+                        cancelVal: '关闭',
+                        cancel: true
+                    });
+                    return false;
+                }
+
+                ids = ids.join(',');
+                art.dialog.open("__ROOT__/index.php?g=portal&m=AdminProduct&a=move&old_term_id={$term.term_id|default=0}&ids=" + ids, {
+                    title: "批量移动",
+                    width: "300px"
+                });
+            });
+        });
+    });
+</script>
+</body>
+</html>

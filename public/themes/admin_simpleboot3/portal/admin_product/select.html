@@ -1,0 +1,73 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <form method="post" class="js-ajax-form" action="">
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th width="16">
+                    <label>
+                        <input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x">
+                    </label>
+                </th>
+                <th>属性值</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>
+                        <php>$checked = in_array($key,$selectedIds)?'checked':'';</php>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]"
+                               value="{$key}" data-name="{$vo}" {$checked}>
+                    </td>
+                    <td>{$vo}</td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+<script>
+    $('.data-item-tr').click(function (e) {
+
+        console.log(e);
+        var $this = $(this);
+        if ($(e.target).is('input')) {
+            return;
+        }
+
+        var $input = $this.find('input');
+        if ($input.is(':checked')) {
+            $input.prop('checked', false);
+        } else {
+            $input.prop('checked', true);
+        }
+    });
+
+    function confirm() {
+        var selectedIds   = [];
+        var selectedNames = [];
+        var selecteds     = [];
+        $('.js-check:checked').each(function () {
+            var $this = $(this);
+            selectedIds.push($this.val());
+            selectedNames.push($this.data('name'));
+
+            selecteds.push({
+                id: $this.val(),
+                name: $this.data('name')
+            });
+        });
+
+        return {
+            selecteds: selecteds,
+            selectedIds: selectedIds,
+            selectedNames: selectedNames
+        };
+    }
+</script>
+</body>
+</html>

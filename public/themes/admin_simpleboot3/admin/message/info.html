@@ -1,0 +1,101 @@
+<include file="public@header" />
+<style>
+    .padding7{
+        padding-top: 7px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">姓名</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                {$data.name}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">手机号</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                {$data.phone}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">邮箱</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                {$data.email}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">留言内容</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                {$data.content}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">产品名称</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                {$data.product_name}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">产品缩略图</label>
+            <div class="col-md-6 col-sm-10">
+                <img src="{:cmf_get_image_url($data.product_image)}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">起重量</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                <foreach name="data.lifting_capacity" item="vo">
+                    {$vo}<br>
+                </foreach>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">起重高度</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                <php>$height = explode(',',$data['lifting_height']);</php>
+                {$height[0]}m - {$height[1]}m
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">跨度</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                <php>$span = explode(',',$data['span']);</php>
+                {$span[0]}m - {$span[1]}m
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">工作电压</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                {$data.operating_voltage}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">赫兹</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                {$data.operating_herts}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">工作等级</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                <foreach name="data.job_level" item="vo">
+                    {$vo}<br>
+                </foreach>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">可配吊具</label>
+            <div class="col-md-6 col-sm-10 padding7">
+                <foreach name="data.sling_available" item="vo">
+                    {$vo.name}<img src="{:cmf_get_image_url($vo.url)}" ><br>
+                </foreach>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+</body>
+</html>

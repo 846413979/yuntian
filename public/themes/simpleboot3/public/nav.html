@@ -1,0 +1,82 @@
+<!--NAV START-->
+<div class="header">
+    <div class="header-up">
+        <div class="header-up-left">Products made by heart</div>
+        <div class="header-up-right">
+            <ul>
+                <li>
+                    <div class="header-up-right-item-search">
+                        <input type="text" name="keyword" id="keyword" value="">
+                        <div class="header-up-right-item-search-icon">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="">Abouts Us</a>
+                </li>
+                <li>
+                    <a href="">Service</a>
+                </li>
+                <li>
+                    <a href="">Industries</a>
+                </li>
+                <li class="header-up-right-item header-up-right-item-whatsapp">
+                    <a href="">{$site_info.whatsapp}</a>
+                </li>
+                <li class="header-up-right-item header-up-right-item-email">
+                    <a href="">{$site_info.email}</a>
+                </li>
+                <li class="header-up-right-item header-up-right-item-lang">
+                    Language
+                    <div class="header-up-right-item-lang-dropdown-icon"></div>
+                    <div class="header-up-right-item-lang-dropdown">
+                        <div class="header-up-right-item-lang-dropdown-item">
+                            <a href="/">
+                                <img src="__TMPL__/public/assets/images/icon-en.png" alt="English">English
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="header-line"></div>
+    <div class="header-down clearfix">
+        <div class="header-down-left">
+            <a href="/">
+                <img src="__TMPL__/public/assets/images/logo.webp" alt="{$site_info.site_name|default=''}">
+            </a>
+        </div>
+        <div class="header-down-right clearfix">
+            <ul class="header-down-right-product clearfix">
+                <foreach name="category_list" item="vo">
+                    <if condition="!empty($parent_id) && $parent_id==$vo['id']">
+                        <li class="nav-item active">
+                        <else/>
+                        <li class="nav-item">
+                    </if>
+                        <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}">{$vo.name}</a>
+                        <notempty name="vo.children">
+                            <div class="nav-sub">
+                                <ul class="nav-sub-ul">
+                                    <foreach name="vo.children" item="v">
+                                        <li>
+                                            <a href="{:cmf_url('portal/index/product',array('id'=>$v['id']))}">
+                                                <img src="{:cmf_get_image_url($v['thumbnail'])}" alt="{$v.name}">
+                                                <div class="nav-sub-title">{$v['name']}</div>
+                                            </a>
+                                        </li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </notempty>
+                    </li>
+                </foreach>
+            </ul>
+            <div class="header-down-right-quote"><a href="">Get a quote</a></div>
+        </div>
+
+    </div>
+</div>
+
+<!--NAV END-->

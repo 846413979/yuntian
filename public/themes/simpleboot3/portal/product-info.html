@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/product-info.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/product-info.js"></script>
+</head>
+<body>
+
+    <include file="public@nav"/>
+
+    <include file="public@banner"/>
+
+    <!--PRODUCT START-->
+    <div class="main-content">
+        <div class="product_info clearfix">
+            <div class="info_left_box">
+                <!--PRODUCT PHOTOS START-->
+                <div class="info_left_photos">
+                    <div class="main-image">
+                        <img id="main-img"
+                             src="{:cmf_get_image_url($product.photos[0]['url'])}"
+                             alt="{$product.photos[0]['name']}">
+                    </div>
+                    <div class="thumbnail-gallery">
+                        <ul class="thumbnail-gallery-list">
+                            <foreach name="product.photos" item="vo">
+                                <li class="thumbnail-gallery-item {$key==0 ? 'active' : ''}"
+                                    data-main-src="{:cmf_get_image_url($vo.url)}">
+                                    <img src="{:cmf_get_image_url($vo.url)}"
+                                         alt="{$vo.name}">
+                                </li>
+                                <li class="thumbnail-gallery-item {$key==0 ? 'active' : ''}"
+                                    data-main-src="{:cmf_get_image_url($vo.url)}">
+                                    <img src="{:cmf_get_image_url($vo.url)}"
+                                         alt="{$vo.name}">
+                                </li>
+                            </foreach>
+                        </ul>
+                        <div class="proto-btn prev-btn">
+                            <img class="prev-img"
+                                 src="__TMPL__/public/assets/images/prev.png"
+                                 alt="prev">
+                            <img class="prev-img-active"
+                                 style="display: none"
+                                 src="__TMPL__/public/assets/images/prev-active.png"
+                                 alt="prev">
+                        </div>
+                        <div class="proto-btn next-btn">
+                            <img class="next-img"
+                                 src="__TMPL__/public/assets/images/next.png"
+                                 alt="next">
+                            <img class="next-img-active"
+                                 style="display: none"
+                                 src="__TMPL__/public/assets/images/next-active.png"
+                                 alt="next">
+                        </div>
+                    </div>
+                </div>
+                <!--PRODUCT PHOTOS END-->
+            </div>
+            <!--PRODUCT PARAMS END-->
+            <div class="info_middle_box">
+                <div class="info_middle_title">
+                    <h1>{$product.title}</h1>
+                </div>
+                <div class="info_middle_line"></div>
+                <div class="info_middle_item">
+                    <div class="item_title">Lifting capacity:</div>
+                    <div class="item_content">{$product.lifting_capacity}</div>
+                </div>
+                <div class="info_middle_line"></div>
+                <div class="info_middle_item">
+                    <div class="item_title">Lifting capacity:</div>
+                    <div class="item_content">{$product.lifting_capacity}</div>
+                </div>
+                <div class="info_middle_line"></div>
+                <div class="info_middle_item">
+                    <div class="item_title">Lifting capacity:</div>
+                    <div class="item_content">{$product.lifting_capacity}</div>
+                </div>
+                <div class="info_middle_line"></div>
+                <div class="info_middle_item">
+                    <div class="item_title">Lifting capacity:</div>
+                    <div class="item_content">{$product.lifting_capacity}</div>
+                </div>
+                <div class="info_middle_line"></div>
+                <div class="info_middle_item">
+                    <div class="item_title">Lifting capacity:</div>
+                    <div class="item_content">{$product.lifting_capacity}</div>
+                </div>
+                <div class="info_middle_line"></div>
+                <div class="info_middle_file">
+                    <div class="file_icon"></div>
+                    Product manual
+                    <div class="download_icon"></div>
+                </div>
+                <div class="info_middle_apply">
+                    <span>Apply:</span>{$product.apply}
+                </div>
+                <div class="info_middle_mark">
+                    <span class="info_middle_mark_title">
+                        Authentication mark:
+                    </span>
+                    <foreach name="product.authentication_mark" item="vo">
+                        <div class="info_middle_mark_img">
+                            <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
+                        </div>
+                    </foreach>
+                </div>
+            </div>
+            <!--PRODUCT PARAMS END-->
+        </div>
+    </div>
+    <!--PRODUCT END-->
+
+
+</body>
+</html>

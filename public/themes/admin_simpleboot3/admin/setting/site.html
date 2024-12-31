@@ -1,0 +1,557 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+
+    .btn-cancel-thumbnail {
+        margin-top: 5px;
+    }
+
+    #photos, #files {
+        margin-bottom: 0;
+    }
+</style>
+<script type="text/html" id="authentication_mark-item-tpl">
+    <li id="saved-authentication_mark{id}">
+        <input id="authentication_mark-{id}" type="hidden" name="authentication_mark_urls[]" value="{filepath}">
+        <input class="form-control" id="authentication_mark-{id}-name" type="text" name="authentication_mark_names[]" value=""
+               style="width: 200px;" title="图片名称">
+        <img id="authentication_mark-{id}-preview" src="{url}" style="height:34px;width: 44px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a class="btn btn-default" href="javascript:uploadOneImage('图片上传','#authentication_mark-{id}');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-authentication_mark{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-authentication_mark{id}').before($('#saved-authentication_mark{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+<script type="text/html" id="sling_available-item-tpl">
+    <li id="saved-sling_available{id}">
+        <input id="sling_available-{id}" type="hidden" name="sling_available_urls[]" value="{filepath}">
+        <input class="form-control" id="sling_available-{id}-name" type="text" name="sling_available_names[]" value=""
+               style="width: 200px;" title="图片名称">
+        <img id="sling_available-{id}-preview" src="{url}" style="height:34px;width: 44px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a class="btn btn-default" href="javascript:uploadOneImage('图片上传','#sling_available-{id}');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-sling_available{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-sling_available{id}').before($('#saved-sling_available{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+<script type="text/html" id="sling_available_active-item-tpl">
+    <li id="saved-sling_available_active{id}">
+        <input id="sling_available_active-{id}" type="hidden" name="sling_available_active_urls[]" value="{filepath}">
+        <input class="form-control" id="sling_available_active-{id}-name" type="text" name="sling_available_active_names[]" value=""
+               style="width: 200px;" title="图片名称">
+        <img id="sling_available_active-{id}-preview" src="{url}" style="height:34px;width: 44px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a class="btn btn-default" href="javascript:uploadOneImage('图片上传','#sling_available_active-{id}');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-sling_available_active{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-sling_available_active{id}').before($('#saved-sling_available_active{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+<script type="text/html" id="about_images-item-tpl">
+    <li id="saved-about_images{id}">
+        <input id="about_images-{id}" type="hidden" name="about_images_urls[]" value="{filepath}">
+        <input class="form-control" id="about_images-{id}-name" type="text" name="about_images_names[]" value="{name}"
+               style="width: 200px;" title="图片名称">
+        <img id="about_images-{id}-preview" src="{url}" style="height:34px;width: 44px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a class="btn btn-default" href="javascript:uploadOneImage('图片上传','#about_images-{id}');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-about_images{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-about_images{id}').before($('#saved-about_images{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#A" data-toggle="tab">{:lang('WEB_SITE_INFOS')}</a></li>
+        <li><a href="#B" data-toggle="tab">{:lang('SEO_SETTING')}</a></li>
+        <li><a href="#C" data-toggle="tab">首页设置</a></li>
+        <li><a href="#D" data-toggle="tab">产品设置</a></li>
+    </ul>
+    <form class="form-horizontal js-ajax-form margin-top-20" role="form" action="{:url('Setting/sitePost')}"
+          method="post">
+        <fieldset>
+            <div class="tabbable">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="A">
+                        <div class="form-group">
+                            <label for="input-site-name" class="col-sm-2 control-label"><span
+                                    class="form-required">*</span>{:lang('WEBSITE_NAME')}</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-site-name" name="options[site_name]"
+                                       value="{$site_info.site_name|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-admin_url_password" class="col-sm-2 control-label">
+                                {:lang('Admin URL Password')}
+                                <a href="http://www.thinkcmf.com/faq.html?url=https://www.kancloud.cn/thinkcmf/faq/493509"
+                                   title="查看帮助手册"
+                                   data-toggle="tooltip"
+                                   target="_blank"><i class="fa fa-question-circle"></i></a>
+                            </label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-admin_url_password"
+                                       name="admin_settings[admin_password]"
+                                       value="{$admin_settings.admin_password|default=''}"
+                                       id="js-site-admin-url-password">
+                                <p class="help-block">英文字母数字，不能为纯数字</p>
+                                <p class="help-block" style="color: red;">
+                                    设置加密码后必须通过以下地址访问后台,请劳记此地址，为了安全，您也可以定期更换此加密码!</p>
+                                <php>
+                                    $root=cmf_get_root();
+                                    $root=empty($root)?'':'/'.$root;
+                                    $site_domain = cmf_get_domain().$root;
+                                </php>
+                                <p class="help-block">后台登录地址：<span id="js-site-admin-url">{$site_domain}/{$admin_settings.admin_password|default='admin'}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-sale_tel" class="col-sm-2 control-label">服务热线</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-sale_tel" name="options[sale_tel]"
+                                       value="{$site_info.sale_tel|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-email" class="col-sm-2 control-label">邮箱</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-email" name="options[email]"
+                                       value="{$site_info.email|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-whatsapp" class="col-sm-2 control-label">WhatsApp</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-whatsapp" name="options[whatsapp]"
+                                       value="{$site_info.whatsapp|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-wechat" class="col-sm-2 control-label">微信号</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-wechat" name="options[wechat]"
+                                       value="{$site_info.wechat|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">地址</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-location" name="options[address]"
+                                       value="{$site_info.address|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-facebook" class="col-sm-2 control-label">Facebook链接</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-facebook" name="options[facebook]"
+                                       value="{$site_info.facebook|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-youtube" class="col-sm-2 control-label">Youtube链接</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-youtube" name="options[youtube]"
+                                       value="{$site_info.youtube|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-linkedin" class="col-sm-2 control-label">Linkedin链接</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-linkedin" name="options[linkedin]"
+                                       value="{$site_info.linkedin|default=''}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-map" class="col-sm-2 control-label">谷歌地图代码</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-map" name="options[map]" style="height: 100px;">{$site_info.map|default=''}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-salesiq" class="col-sm-2 control-label">SalesIQ代码</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-salesiq" name="options[salesiq]" style="height: 100px;">{$site_info.salesiq|default=''}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-google_analytics" class="col-sm-2 control-label">Google Analytics代码</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-google_analytics" name="options[google_analytics]" style="height: 100px;">{$site_info.google_analytics|default=''}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-microsoft_clarity" class="col-sm-2 control-label">Microsoft Clarity代码</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-microsoft_clarity" name="options[microsoft_clarity]" style="height: 100px;">{$site_info.microsoft_clarity|default=''}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="1">
+                                    {:lang('SAVE')}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="B">
+                        <div class="form-group">
+                            <label for="input-site_seo_title" class="col-sm-2 control-label">{:lang('WEBSITE_SEO_TITLE')}</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-site_seo_title"
+                                       name="options[site_seo_title]" value="{$site_info.site_seo_title|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-site_seo_keywords" class="col-sm-2 control-label">{:lang('WEBSITE_SEO_KEYWORDS')}</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-site_seo_keywords"
+                                       name="options[site_seo_keywords]"
+                                       value="{$site_info.site_seo_keywords|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-site_seo_description" class="col-sm-2 control-label">{:lang('WEBSITE_SEO_DESCRIPTION')}</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-site_seo_description"
+                                          name="options[site_seo_description]">{$site_info.site_seo_description|default=''}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">
+                                    {:lang('SAVE')}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="C">
+                        <div class="form-group">
+                            <label for="input-products_description" class="col-sm-2 control-label">热门产品描述</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-products_description" name="products_description" style="height: 100px">{$index_setting.products_description|default=''}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-about_description" class="col-sm-2 control-label">关于我们描述</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-about_description" name="about_description" style="height: 100px">{$index_setting.about_description|default=''}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                关于我们设置
+                            </label>
+                            <div class="col-md-8 col-sm-10">
+                                <ul id="engineering" class="pic-list list-unstyled form-inline">
+                                    <notempty name="index_setting.engineering">
+                                        <foreach name="index_setting.engineering" item="vo">
+                                            <li id="saved-engineering{$key}">
+                                                名称：<input class="form-control" type="text"
+                                                                name="engineering_name[]"
+                                                                value="{$vo.engineering_name|default=''}" style="width: 300px;">
+                                                &nbsp;&nbsp;&nbsp;
+                                                描述：<input class="form-control" type="text"
+                                                            name="engineering_desc[]"
+                                                            value="{$vo.engineering_desc|default=''}" style="width: 300px;">
+                                                &nbsp;&nbsp;&nbsp;
+                                                数量：<input class="form-control" type="number"
+                                                                name="engineering_num[]"
+                                                                value="{$vo.engineering_num|default=''}" style="width: 100px;" >
+                                                &nbsp;&nbsp;&nbsp;
+                                                <a class="btn btn-danger" href="javascript:(function(){$('#saved-engineering{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                            </li>
+                                        </foreach>
+                                    </notempty>
+                                </ul>
+                                <a href="javascript:engineering_add();" class="btn btn-default">添加</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">关于我们图片</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="hidden" name="about_img" id="about_img" value="{$index_setting.about_img|default=''}">
+                                <a href="javascript:uploadOneImage('图片上传','#about_img');">
+                                    <if condition="empty($index_setting['about_img'])">
+                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                             id="about_img-preview" width="135" style="cursor: hand"/>
+                                        <else/>
+                                        <img src="{:cmf_get_image_preview_url($index_setting['about_img'])}" id="about_img-preview"
+                                             width="135" style="cursor: hand"/>
+                                    </if>
+                                </a>
+                                <input type="button" class="btn btn-sm"
+                                       onclick="$('#about_img').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#about_img').val('');return false;"
+                                       value="取消图片">
+                                <p class="help-block">图片尺寸：1440*320</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-choose_description" class="col-sm-2 control-label">选择我们描述</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-choose_description" name="choose_description" style="height: 100px">{$index_setting.choose_description|default=''}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                选择我们设置
+                            </label>
+                            <div class="col-md-8 col-sm-10">
+                                <ul id="choose" class="pic-list list-unstyled form-inline">
+                                    <notempty name="index_setting.choose">
+                                        <foreach name="index_setting.choose" item="vo">
+                                            <li id="saved-choose{$key}">
+                                                名称：<input class="form-control" type="text"
+                                                            name="choose_name[]"
+                                                            value="{$vo.choose_name|default=''}" style="width: 250px;">
+                                                &nbsp;&nbsp;&nbsp;
+                                                描述：<input class="form-control" type="text"
+                                                            name="choose_desc[]"
+                                                            value="{$vo.choose_desc|default=''}" style="width: 400px;">
+                                                &nbsp;&nbsp;&nbsp;
+                                                图标：<input type="hidden" name="choose_image[]" id="choose_image{$key}"
+                                                                value="{$vo.choose_image}">
+                                                <a href="javascript:uploadOneImage('图片上传','#choose_image{$key}');">
+                                                    <if condition="empty($vo.choose_image)">
+                                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                                             id="choose_image{$key}-preview"
+                                                             width="30" style="cursor: pointer"/>
+                                                        <else/>
+                                                        <img src="{:cmf_get_image_preview_url($vo.choose_image)}"
+                                                             id="choose_image{$key}-preview"
+                                                             width="30" style="cursor: pointer"/>
+                                                    </if>
+                                                </a>
+                                                &nbsp;&nbsp;&nbsp;
+                                                选中图标：<input type="hidden" name="choose_image_active[]" id="choose_image_active{$key}"
+                                                            value="{$vo.choose_image_active??''}">
+                                                <a href="javascript:uploadOneImage('图片上传','#choose_image_active{$key}');">
+                                                    <if condition="empty($vo.choose_image_active)">
+                                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                                             id="choose_image_active{$key}-preview"
+                                                             width="30" style="cursor: pointer"/>
+                                                        <else/>
+                                                        <img src="{:cmf_get_image_preview_url($vo.choose_image_active)}"
+                                                             id="choose_image_active{$key}-preview"
+                                                             width="30" style="cursor: pointer"/>
+                                                    </if>
+                                                </a>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a class="btn btn-danger" href="javascript:(function(){$('#saved-choose{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                            </li>
+                                        </foreach>
+                                    </notempty>
+                                </ul>
+                                <a href="javascript:choose_add();" class="btn btn-default">添加</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0" data-action="{:url('indexSitePost')}">
+                                    {:lang('SAVE')}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="D">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                认证证书
+                            </label>
+                            <div class="col-md-6 col-sm-10">
+                                <ul id="authentication_mark" class="pic-list list-unstyled form-inline">
+                                    <notempty name="product_setting.authentication_mark">
+                                        <foreach name="product_setting.authentication_mark" item="vo">
+                                            <php>
+                                                $img_url=cmf_get_image_preview_url($vo['url']);</php>
+                                            <li id="saved-authentication_mark{$key}">
+                                                <input id="authentication_mark-{$key}" type="hidden" name="authentication_mark_urls[]"
+                                                       value="{$vo.url}">
+                                                <input class="form-control" id="authentication_mark-{$key}-name" type="text"
+                                                       name="authentication_mark_names[]"
+                                                       value="{$vo.name|default=''}" style="width: 200px;" title="图片名称">
+                                                <img id="authentication_mark-{$key}-preview"
+                                                     src="{:cmf_get_image_preview_url($vo.url)}"
+                                                     style="height:34px;width: 44px;"
+                                                     onclick="parent.imagePreviewDialog(this.src);">
+                                                <a class="btn btn-default"  href="javascript:uploadOneImage('图片上传','#authentication_mark-{$key}');"><i class="fa fa-upload fa-fw"></i></a>
+                                                <a class="btn btn-danger"  href="javascript:(function(){$('#saved-authentication_mark{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                                <a class="btn btn-success"  href="javascript:(function(){$('#saved-authentication_mark{$key}').before($('#saved-authentication_mark{$key}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                            </li>
+                                        </foreach>
+                                    </notempty>
+                                </ul>
+                                <a href="javascript:uploadMultiImage('图片上传','#authentication_mark','authentication_mark-item-tpl');"
+                                   class="btn btn-default">选择图片</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                工作电压
+                            </label>
+                            <div class="col-md-6 col-sm-10">
+                                <ul id="operating_voltage" class="pic-list list-unstyled form-inline">
+                                    <notempty name="product_setting.operating_voltage">
+                                        <foreach name="product_setting.operating_voltage" item="vo">
+                                            <li id="saved-operating_voltage{$key}">
+                                                <input class="form-control" type="text"
+                                                       name="operating_voltage[]"
+                                                       value="{$vo|default=''}" style="width: 200px;" >
+                                                <a class="btn btn-danger" href="javascript:(function(){$('#saved-operating_voltage{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                            </li>
+                                        </foreach>
+                                    </notempty>
+                                </ul>
+                                <a href="javascript:operating_voltage_add();" class="btn btn-default">添加工作电压</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                工作赫兹
+                            </label>
+                            <div class="col-md-6 col-sm-10">
+                                <ul id="operating_hertz" class="pic-list list-unstyled form-inline">
+                                    <notempty name="product_setting.operating_hertz">
+                                        <foreach name="product_setting.operating_hertz" item="vo">
+                                            <li id="saved-operating_hertz{$key}">
+                                                <input class="form-control" type="text"
+                                                       name="operating_hertz[]"
+                                                       value="{$vo|default=''}" style="width: 200px;" >
+                                                <a class="btn btn-danger" href="javascript:(function(){$('#saved-operating_hertz{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                            </li>
+                                        </foreach>
+                                    </notempty>
+                                </ul>
+                                <a href="javascript:operating_hertz_add();" class="btn btn-default">添加工作赫兹</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                工作等级
+                            </label>
+                            <div class="col-md-6 col-sm-10">
+                                <ul id="job_level" class="pic-list list-unstyled form-inline">
+                                    <notempty name="product_setting.job_level">
+                                        <foreach name="product_setting.job_level" item="vo">
+                                            <li id="saved-job_level{$key}">
+                                                <input class="form-control" type="text"
+                                                       name="job_level[]"
+                                                       value="{$vo|default=''}" style="width: 200px;">
+                                                <a class="btn btn-danger" href="javascript:(function(){$('#saved-job_level{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                            </li>
+                                        </foreach>
+                                    </notempty>
+                                </ul>
+                                <a href="javascript:job_level_add();" class="btn btn-default">添加工作等级</a>
+                            </div>
+                        </div>
+
+                        <script>
+                            function lifting_capacity_add() {
+                                var timestamp = new Date().getTime();
+                                var randomNum = Math.random();
+                                var scaledRandomNum = Math.floor(randomNum * 1000);
+                                var id = timestamp.toString() + scaledRandomNum.toString();
+                                $('#lifting_capacity').append('<li id="saved-lifting_capacity'+id+'"><input class="form-control" type="text" name="lifting_capacity[]" value="" style="width: 200px;"><a class="btn btn-danger" href="javascript:(function(){$(\'#saved-lifting_capacity'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
+                            }
+                            function operating_voltage_add() {
+                                var timestamp = new Date().getTime();
+                                var randomNum = Math.random();
+                                var scaledRandomNum = Math.floor(randomNum * 1000);
+                                var id = timestamp.toString() + scaledRandomNum.toString();
+                                $('#operating_voltage').append('<li id="saved-operating_voltage'+id+'"><input class="form-control" type="text" name="operating_voltage[]" value="" style="width: 200px;"><a class="btn btn-danger" href="javascript:(function(){$(\'#saved-operating_voltage'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
+                            }
+                            function operating_hertz_add() {
+                                var timestamp = new Date().getTime();
+                                var randomNum = Math.random();
+                                var scaledRandomNum = Math.floor(randomNum * 1000);
+                                var id = timestamp.toString() + scaledRandomNum.toString();
+                                $('#operating_hertz').append('<li id="saved-operating_hertz'+id+'"><input class="form-control" type="text" name="operating_hertz[]" value="" style="width: 200px;"><a class="btn btn-danger" href="javascript:(function(){$(\'#saved-operating_hertz'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
+                            }
+                            function job_level_add() {
+                                var timestamp = new Date().getTime();
+                                var randomNum = Math.random();
+                                var scaledRandomNum = Math.floor(randomNum * 1000);
+                                var id = timestamp.toString() + scaledRandomNum.toString();
+                                $('#job_level').append('<li id="saved-job_level'+id+'"><input class="form-control" type="text" name="job_level[]" value="" style="width: 200px;"><a class="btn btn-danger" href="javascript:(function(){$(\'#saved-job_level'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
+                            }
+                        </script>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                产品附件
+                            </label>
+                            <div class="col-md-6 col-sm-10">
+                                <input id="product_file" type="hidden" name="file_url" value="{$product_setting.product_file.url??''}">
+                                <input class="form-control" id="product_file-name" type="text" name="file_name" value="{$product_setting.product_file.name??''}"
+                                       style="width: 200px;display: inline-block" title="文件名称">
+                                <notempty name="product_setting.product_file.url">
+                                    <a class="btn btn-info" id="file-preview" href="{:cmf_get_image_preview_url($product_setting.product_file.url)}" target="_blank"><i class="fa fa-download fa-fw"></i></a>
+                                </notempty>
+                                <a class="btn btn-default" href="javascript:uploadOne('文件上传','#product_file','file');"><i class="fa fa-upload fa-fw"></i></a>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0" data-action="{:url('productSitePost')}">
+                                    {:lang('SAVE')}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+<script type="text/javascript">
+    function engineering_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        $('#engineering').append('<li id="saved-engineering'+id+'">名称：<input class="form-control" type="text" name="engineering_name[]" value="" style="width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;描述：<input class="form-control" type="text" name="engineering_desc[]" style="width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数量：<input class="form-control" type="number" name="engineering_num[]" value="" style="width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-engineering'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
+    }
+
+
+    function choose_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var html = '<li id="saved-choose'+id+'">' +
+            '名称：' +
+            '<input class="form-control" type="text" name="choose_name[]" value="" style="width: 250px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;描述：' +
+            '<input class="form-control" type="text" name="choose_desc[]" value="" style="width: 400px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图标：' +
+            '<input type="hidden" name="choose_image[]" id="choose_image'+id+'" value="">' +
+            '<a href="javascript:uploadOneImage(\'图片上传\',\'#choose_image'+id+'\');">' +
+            '<img src="__TMPL__/public/assets/images/default-thumbnail.png" id="choose_image'+id+'-preview" width="30" style="cursor: pointer"/>' +
+            '</a>' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选中图标：' +
+            '<input type="hidden" name="choose_image_active[]" id="choose_image_active'+id+'" value="">' +
+            '<a href="javascript:uploadOneImage(\'图片上传\',\'#choose_image_active'+id+'\');">' +
+            '<img src="__TMPL__/public/assets/images/default-thumbnail.png" id="choose_image_active'+id+'-preview" width="30" style="cursor: pointer"/>' +
+            '</a>' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' +
+            '<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-choose'+id+'\').remove();})();">' +
+            '<i class="fa fa-trash fa-fw"></i>' +
+            '</a>' +
+            '</li>';
+        $('#choose').append(html);
+    }
+</script>
+</body>
+</html>

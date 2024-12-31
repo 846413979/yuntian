@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/product.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/product.js"></script>
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+
+
+<div class="main-content clearfix">
+    <div class="search_warp">
+        <!-- products category -->
+        <div class="category">
+            <div class="category_title">PRODUCTS</div>
+            <div class="category_line"></div>
+            <div class="category_search clearfix">
+                <input type="text" class="search_input" placeholder="search">
+                <div class="search_btn" id="product_search">
+                    <img src="__TMPL__/public/assets/images/search.png" alt="search">
+                </div>
+            </div>
+            <ul class="category_list">
+                <foreach name="category_list" item="vo">
+                    <li class="category_item {$vo['id']==$parent_id ? 'active' : ''}" data-url="{:cmf_url('product',array('id'=>$vo.id))}">
+                        <div class="category_item_title">
+                            {$vo.name}
+                            <div class="category_item_icon"></div>
+                        </div>
+                        <div class="category_item_list {$vo['id']==$parent_id ? 'show' : ''}">
+                            <ul>
+                                <foreach name="vo['children']" item="v">
+                                    <li class="category_item_list_item {:input('id')==$v.id ? 'active' : ''}" data-url="{:cmf_url('product',array('id'=>$v.id))}">{$v.name}</li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+
+        <!-- industries -->
+        <div class="industries">
+            <div class="industries_title">INDUSTRIES</div>
+            <div class="industries_line"></div>
+            <ul class="industries_list">
+                <foreach name="profession_list" item="vo">
+                    <li class="industries_item" data-id="{$vo.id}">{$vo.name}</li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- product list -->
+    <div class="product_list_warp">
+        <ul class="product_list clearfix">
+            <foreach name="list" item="vo">
+                <li class="product_item">
+                    <a href="{:cmf_url('product_info',array('id'=>$vo['id']))}">
+                        <div class="product_list_item_img">
+                            <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}">
+                        </div>
+                        <div class="product_list_item_title">{$vo.title}</div>
+                        <div class="product_list_item_category">Category—{$vo.category.name}</div>
+                    </a>
+                </li>
+            </foreach>
+        </ul>
+        <!-- page -->
+        <div class="products-content-right-page">
+            <ul class="pagination">{$page}</ul>
+        </div>
+    </div>
+
+</div>
+
+<include file="public@foot"/>
+
+</body>
+</html>
