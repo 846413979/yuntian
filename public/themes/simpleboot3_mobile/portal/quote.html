@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/quote.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+<div class="main-content">
+    <div class="contact">
+        <div class="contact-left">
+            <div class="contact-left-title">{$site_info.site_name}</div>
+            <div class="contact-left-content">
+                <img src="__TMPL__/public/assets/images/quote-email.webp" alt="email">
+                <a><p>{$site_info.email|default=''}</p></a>
+            </div>
+            <div class="contact-left-content">
+                <img src="__TMPL__/public/assets/images/quote-location.webp" alt="location">
+                <a><p>{$site_info.address|default=''}</p></a>
+            </div>
+            <div class="contact-left-content">
+                <img src="__TMPL__/public/assets/images/quote-whatsapp.webp" alt="whatsapp">
+                <a><p>{$site_info.whatsapp|default=''}</p></a>
+            </div>
+            <div class="contact-left-content">
+                <img src="__TMPL__/public/assets/images/quote-tel.webp" alt="tel">
+                <a><p>{$site_info.sale_tel|default=''}</p></a>
+            </div>
+            <div class="contact-left-content">
+                <img src="__TMPL__/public/assets/images/quote-time.webp" alt="time">
+                <a><p>0:00-24:00</p></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="quote">
+        <input type="text" name="name" class="quote-name" placeholder="Name:">
+        <input type="text" name="phone" class="quote-phone" placeholder="Phone / Whatsapp:">
+        <input type="text" name="email" class="quote-email" placeholder="E-mail:">
+        <textarea name="message" class="quote-message" placeholder="Message:"></textarea>
+        <div class="quote-btn" onclick="submit()">SUBMIT</div>
+    </div>
+</div>
+
+<include file="public@foot"/>
+
+<script>
+    function submit() {
+        let name = $('.quote-name').val();// 姓名
+        let phone = $('.quote-phone').val();// 手机号
+        let email = $('.quote-email').val();// 邮箱
+        let content = $('.quote-message').val();// 内容
+
+        let data = {
+            name: name,
+            phone: phone,
+            email: email,
+            content: content,
+            type: 2,
+        }
+        $.ajax({
+            url: '/portal/index/inquiry',
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 1) {
+                    //谷歌点击转化
+                    gtag_report_conversion();
+                    alert('submit success');
+                } else {
+                    alert('submit failed:' + res.msg);
+                }
+            }
+        })
+    }
+
+</script>
+
+</body>
+</html>

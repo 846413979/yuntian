@@ -4,25 +4,27 @@
             <div class="footer-nav">
                 <ul>
                     <li class="footer-nav-list-item">
-                        <a href="">HOME</a>
+                        <a href="/">HOME</a>
                     </li>
                     <li class="footer-nav-list-item">
-                        <a href="">PRODUCTS</a>
+                        <a href="{:cmf_url('portal/index/product')}">PRODUCTS</a>
                     </li>
                     <li class="footer-nav-list-item">
-                        <a href="">SERVICE</a>
+                        <a href="{:cmf_url('portal/index/service')}">SERVICE</a>
                     </li>
                     <li class="footer-nav-list-item">
-                        <a href="">CASES</a>
+                        <a href="{:cmf_url('portal/index/industries')}">CASES</a>
                     </li>
                     <li class="footer-nav-list-item">
-                        <a href="">ABOUT US</a>
+                        <a href="{:cmf_url('portal/index/about')}">ABOUT US</a>
                     </li>
                     <li class="footer-nav-list-item">
-                        <a href="">GET A QUOTE</a>
+                        <a href="{:cmf_url('portal/index/quote')}">GET A QUOTE</a>
                     </li>
                 </ul>
             </div>
+            <div class="footer-nav-line footer-nav-line1"></div>
+            <div class="footer-nav-line footer-nav-line2"></div>
             <div class="footer-products">
                 <div class="footer-products-title">PRODUCTS</div>
                 <ul class="footer-products-list">
@@ -43,7 +45,7 @@
                         <div class="footer-contact-item-icon">
                             <img src="__TMPL__/public/assets/images/foot-email.webp" alt="email">
                         </div>
-                        <a class="footer-contact-item-text">{$site_info.email}</a>
+                        <a class="footer-contact-item-text" onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>
                     </div>
                     <div class="footer-contact-item clearfix">
                         <div class="footer-contact-item-icon">
@@ -55,7 +57,7 @@
                         <div class="footer-contact-item-icon">
                             <img src="__TMPL__/public/assets/images/foot-phone.webp" alt="phone">
                         </div>
-                        <a class="footer-contact-item-text">{$site_info.sale_tel}</a>
+                        <a class="footer-contact-item-text" onclick="gtag_report_conversion('tel:{$site_info.sale_tel}');">{$site_info.sale_tel}</a>
                     </div>
                     <div class="footer-contact-item clearfix">
                         <div class="footer-contact-item-icon">
@@ -117,17 +119,23 @@
             <p class="right_fix_box_title">Message</p>
         </div>
         <div class="right_fix_box right_fix_whatsapp">
-            <a>
+            <php>
+                $cleanNumber = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
+                if (strpos($cleanNumber, '0') === 0) {
+                $cleanNumber = preg_replace('/^0+/', '', $cleanNumber);
+                }
+            </php>
+            <a onclick="gtag_report_conversion('https://api.whatsapp.com/send?phone={$cleanNumber}');">
                 <img src="__TMPL__/public/assets/images/floating-whatsapp.png" alt="whatsapp" title="whatsapp" data-default_img="__TMPL__/public/assets/images/floating-whatsapp.png"  data-active_img="__TMPL__/public/assets/images/floating-whatsapp-active.png">
                 <p class="right_fix_box_title">WhatsApp</p>
             </a>
             <div class="right_fix_box_connect">
                 <p>WhatsApp:</p>
-                <p class="right_fix_box_connect_text"><a>{$site_info.whatsapp}</a></p>
+                <p class="right_fix_box_connect_text"><a onclick="gtag_report_conversion('https://api.whatsapp.com/send?phone={$cleanNumber}');">{$site_info.whatsapp}</a></p>
             </div>
         </div>
         <div class="right_fix_box right_fix_email">
-            <a href="mailto:{$site_info.email}">
+            <a onclick="gtag_report_conversion('mailto:{$site_info.email}');">
                 <img src="__TMPL__/public/assets/images/floating-email.png" alt="email" title="email" data-default_img="__TMPL__/public/assets/images/floating-email.png"  data-active_img="__TMPL__/public/assets/images/floating-email-active.png">
                 <p class="right_fix_box_title">Send Email</p>
             </a>
@@ -146,3 +154,51 @@
         </div>
     </div>
 </div>
+
+
+<!--弹窗-->
+<div class="popover_wrap" style="display: none;">
+    <div class="popover_container">
+        <div class=popover_close>
+            <img src="__TMPL__/public/assets/images/close.png" alt="close">
+        </div>
+        <div class="popover_content">
+            <div class="popover_title">
+                <h2>Develop your lifting solution</h2>
+                <p class="popover_title_description">Contact us today by email at :<a onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>,
+                    or fill out the form below.</p>
+            </div>
+            <div class="popover_form">
+                <form method="post">
+                    <div class="popover_form_name">
+                        <input id="popover-name" type="text" name="name" placeholder="Name:">
+                    </div>
+                    <div class="popover_form_phone">
+                        <input id="popover-phone" type="text" name="phone" placeholder="Phone / WhatsApp:">
+                    </div>
+                    <div class="popover_form_email">
+                        <input id="popover-email" type="text" name="email" placeholder="E-mail:">
+                    </div>
+                    <div class="popover_form_content">
+                        <textarea id="popover-content" name="content" placeholder="Message:"></textarea>
+                    </div>
+                    <div class="popover_form_submit">
+                        <input name="product_id" id="product-id" type="hidden" value="{$product.id|default=''}">
+                        <input name="file" id="file" type="hidden" value="">
+                        <input type="hidden" name="feedback_type" id="feedback_type" value="2">
+                        <button id="popover-submit" type="button">SUBMIT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<notempty name="site_info.salesiq">
+    {:htmlspecialchars_decode($site_info.salesiq)}
+</notempty>
+
+<notempty name="site_info.google_tag_body">
+    {:htmlspecialchars_decode($site_info.google_tag_body)}
+</notempty>

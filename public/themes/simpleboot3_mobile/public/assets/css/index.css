@@ -1,0 +1,263 @@
+/**
+ * banner styles
+ **/
+.swiper-pagination-bullet{
+    color: #fff;
+    font-size: 1.4rem;
+    margin-left: 0.5rem;
+    line-height: 3.2rem;
+    background-color: transparent;
+    width: 2rem;
+    height: 2rem;
+    opacity: 1;
+
+}
+.swiper-pagination-bullet-active{
+    color: #2980D3;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.swiper-slide{
+    position: relative;
+}
+.swiper-slide-title{
+    position: absolute;
+    top: 50%;
+    left: 3rem;
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+    line-height: 2rem;
+    color: #2980D3;
+    font-weight: bold;
+    width: auto;
+}
+
+.hot-products{
+    width: 36rem;
+    margin: 4rem auto 0;
+}
+.hot-products .hot-products-title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 3rem;
+    color: #333333;
+    line-height: 4rem;
+    text-align: center;
+    font-style: italic;
+}
+.hot-products .hot-products-desc{
+    font-family: Arial, Arial;
+    font-size: 1.6rem;
+    color: #333333;
+    line-height: 1.8rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.hot-products .product-content-ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+.hot-products .product-content-li{
+    width: 17.5rem;
+    margin-right: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+.hot-products .product-content-li:nth-child(2n){
+    margin-right: 0;
+}
+.hot-products .product-content-li .product-content-li-img{
+    width: 17.5rem;
+    height: 17.5rem;
+}
+.hot-products .product-content-li .product-content-li-img img{
+    width: 100%;
+    height: 100%;
+}
+.hot-products .product-content-li .product-content-li-title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: #333333;
+    line-height: 2rem;
+    margin-top: 0.5rem;
+}
+.hot-products .product-content-li .product-content-li-desc{
+    font-family: Arial, Arial;
+    font-size: 1.4rem;
+    color: #333333;
+    line-height: 1.6rem;
+    margin-top: 0.5rem;
+}
+.hot-products .product-content-li .product_list_item_btn div{
+    margin-top: 10px;
+    float: left;
+    width: 7rem;
+    height: 3rem;
+    background: #2980D3;
+    border-radius: 1.5rem;
+    line-height: 3rem;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.hot-products .product-content-li .product_list_item_btn  .product_list_item_btn_download{
+    background-color: #FFBE53;
+    margin-left: 1rem;
+}
+
+
+/**
+ * about  styles
+ **/
+.about{
+    width: 36rem;
+    margin: 2rem auto 0;
+}
+.about .about-title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 3rem;
+    color: #333333;
+    line-height: 4rem;
+    text-align: center;
+    font-style: italic;
+}
+.about .about-desc{
+    font-family: Arial, Arial;
+    font-size: 1.4rem;
+    color: #333333;
+    line-height: 2rem;
+    margin-top: 1rem;
+}
+.about .about-content{
+}
+.about .about-content ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.about .about-content .about-content-item{
+    width: 100%;
+    margin-top: 3rem;
+}
+.about .about-content .about-content-item .about-content-num{
+    font-family: DIN, DIN;
+    font-weight: bold;
+    font-size: 4rem;
+    color: #333333;
+    line-height: 4rem;
+    text-align: center;
+}
+.about .about-content .about-content-item .about-content-line{
+    width: 100%;
+    height: 1px;
+    background: #ECECEC;
+}
+.about .about-content .about-content-item .about-content-title{
+    font-family: Arial, Arial;
+    font-size: 2rem;
+    color: #333333;
+    line-height: 3rem;
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 0;
+}
+.about .about-content .about-content-item .about-content-desc{
+    font-family: Arial, Arial;
+    font-size: 2rem;
+    color: #999999;
+    line-height: 3rem;
+    text-align: center;
+}
+
+.about .about-img{
+    width: 100%;
+}
+.about .about-img img{
+    width: 100%;
+    height: auto;
+}
+
+/**
+* choose  styles
+***/
+.choose-warp{
+    width: 100%;
+    margin: 4rem auto 0;
+    padding: 4rem 0;
+    background: #F3F2F9;
+}
+.choose-warp .choose{
+    width: 37.5rem;
+    margin: 0 auto;
+}
+.choose .choose-title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 3rem;
+    color: #333333;
+    line-height: 4rem;
+    text-align: center;
+    font-style: italic;
+}
+.choose .choose-desc{
+    font-family: Arial, Arial;
+    font-size: 1.4rem;
+    color: #333333;
+    line-height: 2rem;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0 1rem;
+}
+.choose .choose-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.choose .choose-list .choose-item{
+    width: 18rem;
+    height: 30rem;
+    background-color: #FFFFFF;
+    margin-top: 2rem;
+    padding: 1rem;
+
+}
+.choose .choose-list .choose-item .choose-item-icon{
+    width: 5rem;
+    height: 5rem;
+    overflow: hidden;
+}
+.choose .choose-list .choose-item .choose-item-icon img{
+    width: 100%;
+    height: 100%;
+    transition: transform 1s ease;
+}
+.choose .choose-list .choose-item .choose-item-icon img.rotated {
+    transform: rotateY(360deg);
+}
+.choose .choose-list .choose-item .choose-item-title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #333333;
+    line-height: 2.4rem;
+    margin-top: 2rem;
+}
+.choose .choose-list .choose-item .choose-item-desc{
+    font-family: Arial, Arial;
+    font-size: 1.4rem;
+    color: #333333;
+    line-height: 2rem;
+    margin-top: 1rem;
+}
+.choose .choose-list .choose-item.active{
+    background: #2980D3;
+}
+.choose .choose-list .choose-item.active .choose-item-title,
+.choose .choose-list .choose-item.active .choose-item-desc{
+    color: #FFFFFF;
+}

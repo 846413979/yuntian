@@ -60,7 +60,6 @@
                 <th>起重高度</th>
                 <th>跨度</th>
                 <th>工作等级</th>
-                <th>可配吊具</th>
                 <th width="160">创建时间</th>
                 <th width="70">状态</th>
                 <th width="95">操作</th>
@@ -99,34 +98,19 @@
                         </notempty>
                     </td>
                     <td>
-                        <notempty name="vo.lifting_capacity">
-                            <foreach name="vo.lifting_capacity" item="v">
-                                {$v}&nbsp;&nbsp;
-                            </foreach>
-                        </notempty>
+                        {$vo.lifting_capacity}
                     </td>
                     <td>
-                        {$vo.max_lifting_height}m
+                        {$vo.lifting_height}
                     </td>
                     <td>
-                        <if condition="!empty($vo['min_span']) || !empty($vo['max_span'])">{$vo.min_span}-{$vo.max_span}m</if>
+                        {$vo.span}
                     </td>
                     <td>
                         <notempty name="vo.job_level">
                             <foreach name="vo.job_level" item="v">
                                 {$v}&nbsp;&nbsp;
                             </foreach>
-                        </notempty>
-                    </td>
-                    <td>
-                        <notempty name="vo.sling_available">
-                            <foreach name="vo.sling_available" item="v">
-                                <span>{$v.name}</span>:<a href="javascript:parent.imagePreviewDialog('{:cmf_get_image_preview_url($v.url)}');">
-                                <img src="{:cmf_get_image_preview_url($v.url)}" style="width: 18px;height: 18px;">&nbsp;&nbsp;&nbsp;
-                            </a>
-                            </foreach>
-                            <else/>
-                            <i class="fa fa-close fa-fw"></i>
                         </notempty>
                     </td>
                     <td>

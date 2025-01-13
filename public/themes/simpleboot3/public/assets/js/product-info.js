@@ -55,4 +55,33 @@ $(document).ready(function () {
         $('.next-img').show()
         $('.next-img-active').hide()
     })
+
+
+    $('.info_right_box .info_right_item_checkbox .info_right_item_content').on('click','.info_right_item_content_level',function (){
+        $(this).addClass('active').siblings().removeClass('active');
+    })
+
+
+    $('#inquiry').click(function (){
+        $('#feedback_type').val(1);
+        $('.popover_wrap').show();
+    })
+
+    $('#download').click(function (){
+        $('#feedback_type').val(1);
+        $('#file').val($(this).data('href'));
+        $('.popover_wrap').show();
+    })
+
+    $(document).on('click','#inquiry1',function (){
+        $('#feedback_type').val(1);
+        $('.popover_wrap').show();
+    })
+
+    $(document).on('click','#download1',function (){
+        $('#feedback_type').val(1);
+        $('#file').val($(this).data('href'));
+        $('.popover_wrap').show();
+    })
+
 });

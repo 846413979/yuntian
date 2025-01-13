@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/about.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/about.js"></script>
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+
+
+<div class="about-content">
+    <div class="about_title">ABOUT US</div>
+    <div class="top_content">
+        <div class="top_left_content">
+            <div class="top_left_content_title">{$about_site.top_title}</div>
+            <div class="top_left_content_text">{$about_site.top_text}</div>
+        </div>
+        <div class="top_right_content">
+            <img src="{:cmf_get_image_url($about_site.top_image)}" alt="{$about_site.top_title}">
+        </div>
+    </div>
+    <div class="middle_content">
+        {$about_site.middle_text|htmlspecialchars_decode}
+    </div>
+    <div class="bottom_content">
+        <div class="bottom_left_content">
+            <img src="{:cmf_get_image_url($about_site.bottom_image)}" alt="{$about_site.top_title}">
+        </div>
+        <div class="bottom_right_content">
+            <div class="bottom_right_content_title">CORPORATE CULTURE</div>
+            <div class="bottom_right_content_text">
+                <div class="bottom_right_content_text_title">ESSENCE</div>
+                <div class="bottom_right_content_text_content">{$about_site.essence}</div>
+            </div>
+            <div class="bottom_right_content_text">
+                <div class="bottom_right_content_text_title">WORKING METHODS</div>
+                <div class="bottom_right_content_text_content">{$about_site.working_methods}</div>
+            </div>
+            <div class="bottom_right_content_text">
+                <div class="bottom_right_content_text_title">WOLVES SPIRIT</div>
+                <div class="bottom_right_content_text_content">{$about_site.wolves_spirit}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CHOOSE START -->
+<div class="choose-warp">
+    <div class="choose">
+        <div class="choose-title">WHY CHOOSE US</div>
+        <div class="choose-desc">{$index_site.choose_description}</div>
+        <ul class="choose-list">
+            <foreach name="index_site.choose" item="vo">
+                <li class="choose-item">
+                    <div class="choose-item-icon">
+                        <img src="{:cmf_get_image_url($vo.choose_image)}" alt="choose" data-default_img="{:cmf_get_image_url($vo.choose_image)}" data-active_img="{:cmf_get_image_url($vo.choose_image_active)}">
+                    </div>
+                    <div class="choose-item-title">{$vo.choose_name}</div>
+                    <div class="choose-item-desc">{$vo.choose_desc}</div>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+</div>
+<!-- CHOOSE END -->
+
+
+<!-- CERTIFICATE START -->
+<div class="certificate">
+    <div class="certificate-title">CERTIFICATE</div>
+    <ul class="certificate-list">
+        <foreach name="about_site.certificate_images" item="vo">
+            <li class="certificate-item">
+                <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
+            </li>
+        </foreach>
+    </ul>
+</div>
+<!-- CERTIFICATE END -->
+
+<include file="public@foot"/>
+
+</body>
+</html>

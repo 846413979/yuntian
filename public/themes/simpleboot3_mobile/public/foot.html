@@ -1,0 +1,140 @@
+<!--FOOT START-->
+<div class="footer">
+    <div class="footer-logo">
+        <img src="__TMPL__/public/assets/images/logo-white.png" alt="logo">
+    </div>
+    <div class="footer-line"></div>
+    <div class="footer-content">
+        <div class="footer-contact clearfix">
+            <div class="footer-contact-item">
+                <img src="__TMPL__/public/assets/images/foot-email.webp" alt="email">
+                <p class="footer-contact-item-content">
+                    <a onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>
+                </p>
+            </div>
+            <div class="footer-contact-item">
+                <img src="__TMPL__/public/assets/images/foot-location.webp" alt="location">
+                <p class="footer-contact-item-content">{$site_info.address}</p>
+            </div>
+            <php>
+                $cleanNumber = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
+                if (strpos($cleanNumber, '0') === 0) {
+                $cleanNumber = preg_replace('/^0+/', '', $cleanNumber);
+                }
+            </php>
+            <div class="footer-contact-item">
+                <img src="__TMPL__/public/assets/images/quote-whatsapp.webp" alt="location">
+                <p class="footer-contact-item-content">
+                    <a onclick="gtag_report_conversion('https://api.whatsapp.com/send?phone={$cleanNumber}');" target="_blank">{$site_info.whatsapp}</a>
+                </p>
+            </div>
+            <div class="footer-contact-item">
+                <img src="__TMPL__/public/assets/images/foot-phone.webp" alt="phone">
+                <p class="footer-contact-item-content">
+                    <a onclick="gtag_report_conversion('tel:{$site_info.sale_tel}');">{$site_info.sale_tel}</a>
+                </p>
+            </div>
+            <div class="footer-contact-item">
+                <img src="__TMPL__/public/assets/images/foot-wechat.webp" alt="wechat">
+                <p class="footer-contact-item-content">
+                    <a target="_blank">{$site_info.wechat}</a>
+                </p>
+            </div>
+            <div class="footer-contact-social">
+                <a href="{$site_info.linkedin|default='javascript:;'}"><img src="__TMPL__/public/assets/images/linkedin.webp" alt="linkedin"></a>
+                <a href="{$site_info.facebook|default='javascript:;'}"><img src="__TMPL__/public/assets/images/facebook.webp" alt="facebook"></a>
+                <a href="{$site_info.youtube|default='javascript:;'}"><img src="__TMPL__/public/assets/images/youtube.webp" alt="youtube"></a>
+            </div>
+        </div>
+
+        <div class="footer-feedback">
+            <div class="footer-feedback-item">
+                NAME:
+                <input type="text" name="footer-name" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <div class="footer-feedback-item">
+                EMAIL:
+                <input type="text" name="footer-email" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <div class="footer-feedback-item">
+                MESSAGE:
+                <input type="text" name="footer-message" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <button class="footer-feedback-btn">Submit Your Request</button>
+        </div>
+    </div>
+    <div class="right_fix">
+        <div class="right_fix_connect">
+            <div class="right_fix_box right_fix_form">
+                <img src="__TMPL__/public/assets/images/floating-form.png" alt="form" title="form">
+                <p class="right_fix_box_title">Message</p>
+            </div>
+            <div class="right_fix_box right_fix_whatsapp">
+                <a onclick="gtag_report_conversion('https://api.whatsapp.com/send?phone={$cleanNumber}');">
+                    <img src="__TMPL__/public/assets/images/floating-whatsapp.png" alt="whatsapp" title="whatsapp">
+                    <p class="right_fix_box_title">WhatsApp</p>
+                </a>
+            </div>
+            <div class="right_fix_box right_fix_email">
+                <a onclick="gtag_report_conversion('mailto:{$site_info.email}');">
+                    <img src="__TMPL__/public/assets/images/floating-email.png" alt="email" title="email">
+                    <p class="right_fix_box_title">Send Email</p>
+                </a>
+            </div>
+            <div class="right_fix_box right_fix_wechat">
+                <a onclick="gtag_report_conversion('tel:{$site_info.sale_tel}');">
+                    <img src="__TMPL__/public/assets/images/floating-phone.png" alt="sale_tel" title="sale_tel">
+                    <p class="right_fix_box_title">Sale Tel</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--FOOT END-->
+
+<div class="popover_wrap" style="display: none;">
+  <div class="popover_container">
+    <div class = popover_close>
+      <img src="__TMPL__/public/assets/images/close.png" alt="">
+    </div>
+    <div class="popover_content">
+      <div class="popover_title">
+        <h2>Develop your lifting solution</h2>
+        <p class="popover_title_description">Contact us today by email at :<a onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>, or fill out the form below.</p>
+      </div>
+      <div class="popover_form">
+        <form method="post">
+          <div class="popover_form_name">
+            <input id="popover-name" type="text" name="name" placeholder="Name:" >
+          </div>
+          <div class="popover_form_phone">
+            <input id="popover-phone" type="text" name="phone" placeholder="Phone / WhatsApp:" >
+          </div>
+          <div class="popover_form_email">
+            <input id="popover-email" type="text" name="email" placeholder="E-mail:" >
+          </div>
+          <div class="popover_form_content">
+            <textarea id="popover-content" name="content" placeholder="Message:" ></textarea>
+          </div>
+          <div class="popover_form_submit">
+            <input type="hidden" id="file_url" value="">
+            <button id="popover-submit" type="button">SUBMIT</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<notempty name="site_info.salesiq">
+    {:htmlspecialchars_decode($site_info.salesiq)}
+</notempty>
+
+<notempty name="site_info.google_tag_body">
+    {:htmlspecialchars_decode($site_info.google_tag_body)}
+</notempty>
+
+

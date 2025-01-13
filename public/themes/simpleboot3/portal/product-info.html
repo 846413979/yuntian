@@ -34,11 +34,6 @@
                                     <img src="{:cmf_get_image_url($vo.url)}"
                                          alt="{$vo.name}">
                                 </li>
-                                <li class="thumbnail-gallery-item {$key==0 ? 'active' : ''}"
-                                    data-main-src="{:cmf_get_image_url($vo.url)}">
-                                    <img src="{:cmf_get_image_url($vo.url)}"
-                                         alt="{$vo.name}">
-                                </li>
                             </foreach>
                         </ul>
                         <div class="proto-btn prev-btn">
@@ -66,58 +61,315 @@
             <!--PRODUCT PARAMS END-->
             <div class="info_middle_box">
                 <div class="info_middle_title">
-                    <h1>{$product.title}</h1>
+                    {$product.title}
                 </div>
+                <notempty name="product.lifting_capacity">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Capacity:</div>
+                        <div class="item_content">{$product.lifting_capacity}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.lifting_height">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Lifting Height:</div>
+                        <div class="item_content">{$product.lifting_height}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.span">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Span:</div>
+                        <div class="item_content">{$product.span}</div>
+                    </div>
+                </notempty>
+                <if condition="!empty($product['operating_voltage']) && !empty($product['operating_hertz'])">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Voltage/Hertz:</div>
+                        <div class="item_content">According to your demands</div>
+                    </div>
+                </if>
+                <notempty name="product.job_level">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Working Class:</div>
+                        <div class="item_content">{:implode(',',$product['job_level'])}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.ship_width">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Dock Width:</div>
+                        <div class="item_content">{$product['ship_width']}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.work_radius">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Outreach:</div>
+                        <div class="item_content">{$product['work_radius']}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.gauge">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Gauge:</div>
+                        <div class="item_content">{$product.gauge}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.draft_depth">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Draft Depth:</div>
+                        <div class="item_content">{$product.draft_depth}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.arm_type">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Arm Type:</div>
+                        <div class="item_content">{$product.arm_type}</div>
+                    </div>
+                </notempty>
                 <div class="info_middle_line"></div>
-                <div class="info_middle_item">
-                    <div class="item_title">Lifting capacity:</div>
-                    <div class="item_content">{$product.lifting_capacity}</div>
-                </div>
-                <div class="info_middle_line"></div>
-                <div class="info_middle_item">
-                    <div class="item_title">Lifting capacity:</div>
-                    <div class="item_content">{$product.lifting_capacity}</div>
-                </div>
-                <div class="info_middle_line"></div>
-                <div class="info_middle_item">
-                    <div class="item_title">Lifting capacity:</div>
-                    <div class="item_content">{$product.lifting_capacity}</div>
-                </div>
-                <div class="info_middle_line"></div>
-                <div class="info_middle_item">
-                    <div class="item_title">Lifting capacity:</div>
-                    <div class="item_content">{$product.lifting_capacity}</div>
-                </div>
-                <div class="info_middle_line"></div>
-                <div class="info_middle_item">
-                    <div class="item_title">Lifting capacity:</div>
-                    <div class="item_content">{$product.lifting_capacity}</div>
-                </div>
-                <div class="info_middle_line"></div>
-                <div class="info_middle_file">
-                    <div class="file_icon"></div>
-                    Product manual
-                    <div class="download_icon"></div>
-                </div>
+                <if condition="!empty($product['file']) || !empty($product_setting['product_file'])">
+                    <div class="info_middle_file" id="download" data-href="{:empty($product.file) ? cmf_get_file_download_url($product_setting.product_file.url) : cmf_get_file_download_url($product.file.url)}">
+                        <img class="file" src="__TMPL__/public/assets/images/file.webp" alt="file">
+                        Product manual
+                        <img class="download" src="__TMPL__/public/assets/images/download.webp" alt="download">
+                    </div>
+                </if>
                 <div class="info_middle_apply">
-                    <span>Apply:</span>{$product.apply}
+                    <span>Apply:</span> {$product.industry}
                 </div>
-                <div class="info_middle_mark">
-                    <span class="info_middle_mark_title">
-                        Authentication mark:
-                    </span>
-                    <foreach name="product.authentication_mark" item="vo">
-                        <div class="info_middle_mark_img">
-                            <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
-                        </div>
-                    </foreach>
-                </div>
+                <notempty name="product.authentication_mark">
+                    <div class="info_middle_mark">
+                        <span class="info_middle_mark_title">
+                            Authentication mark:
+                        </span>
+                        <foreach name="product.authentication_mark" item="vo">
+                            <div class="info_middle_mark_img">
+                                <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
+                            </div>
+                        </foreach>
+                    </div>
+                </notempty>
             </div>
             <!--PRODUCT PARAMS END-->
+
+
+            <!--PRODUCT INPUT START-->
+            <div class="info_right_box">
+                <div class="info_right_tips">
+                    Submit your demands:
+                </div>
+                <php>
+                    $input_field = explode(',',$product['input_field']);
+                </php>
+                <if condition="in_array('lifting_capacity',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Capacity:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="lifting_capacity" placeholder="Please enter the required capacity">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('lifting_height',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Lifting Height:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="lifting_height" placeholder="Please enter the required height">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('span',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Span:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="span" placeholder="Please enter the required span">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('operating_voltage',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Voltage/Hertz:
+                        </div>
+                        <div class="info_right_item_content">
+                            <select class="info_right_item_content_select" name="voltage">
+                                <foreach name="product_setting.operating_voltage" item="vo">
+                                    <option value="{$vo}">{$vo}</option>
+                                </foreach>
+                            </select>
+                            <select class="info_right_item_content_select" name="hertz">
+                                <foreach name="product_setting.operating_hertz" item="vo">
+                                    <option value="{$vo}">{$vo}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('job_level',$input_field)">
+                    <div class="info_right_item info_right_item_checkbox">
+                        <div class="info_right_item_title">
+                            Working Class:
+                        </div>
+                        <div class="info_right_item_content">
+                            <ul class="clearfix">
+                                <foreach name="product.job_level" item="vo">
+                                    <li class="info_right_item_content_level {$key==0 ? 'active' : ''}" data-level="{$vo}">{$vo}</li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('ship_width',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Dock Width:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="ship_width" placeholder="Please enter the required dock width">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('work_radius',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Outreach:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="work_radius" placeholder="Please enter the required outreach">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('gauge',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Gauge:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="gauge" placeholder="Please enter the required gauge">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('draft_depth',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Draft Depth:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="draft_depth" placeholder="Please enter the required draft depth">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('arm_type',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Arm Type:
+                        </div>
+                        <div class="info_right_item_content">
+                            <php>
+                                $arm_type = explode(',',$product['arm_type']);
+                            </php>
+                            <select class="info_right_item_content_select info_right_item_content_select_arm_type" name="arm_type">
+                                <foreach name="arm_type" item="vo">
+                                    <option value="{$vo}">{$vo}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                    </div>
+                </if>
+                <!--button-->
+                <div class="info_right_btn info_right_submit" id="inquiry">SUBMIT</div>
+                <div class="info_right_btn info_right_chat">ONLINE CHAT</div>
+            </div>
+            <!--PRODUCT INPUT END-->
         </div>
+
+        <!-- HOT PRODUCTS START -->
+        <notempty name="recommended_list">
+        <div class="hot-products">
+            <div class="hot-products-title">HOT PRODUCTS</div>
+            <div class="hot-products-list">
+                <ul>
+                    <foreach name="recommended_list" item="vo">
+                        <li class="product_item">
+                            <a href="{:cmf_url('product_info',array('id'=>$vo['id']))}">
+                                <div class="product_list_item_img">
+                                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}">
+                                </div>
+                                <div class="product_list_item_title">{$vo.title}</div>
+                            </a>
+                            <div class="product_list_item_btn">
+                                <div class="product_list_item_btn_submit" id="inquiry1">SUBMIT</div>
+                                <if condition="!empty($vo['file']) || !empty($product_setting['product_file'])">
+                                    <div class="product_list_item_btn_download" id="download1" data-href="{:empty($product.file) ? cmf_get_file_download_url($product_setting.product_file.url) : cmf_get_file_download_url($product.file.url)}">DOWNLOAD</div>
+                                </if>
+                            </div>
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+        </notempty>
+        <!-- HOT PRODUCTS END -->
+
+        <!-- PRODUCT CONTENT START -->
+        <div class="product-content">
+            <div class="product-overview">
+                <div class="product-content-title">
+                    Product Overview
+                </div>
+                <div class="product-content-text">
+                    {$product.overview}
+                </div>
+            </div>
+            <div class="product-application">
+                <div class="product-content-title">
+                    Application Scenario
+                </div>
+                <div class="product-content-text">
+                    {$product.scenario}
+                </div>
+                <div class="product-content-case">
+                    <ul>
+                        <foreach name="product.case" item="vo">
+                            <li class="product-content-case-item">
+                                <a href="{:cmf_get_image_url($vo.url)}" target="_blank"><img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}"></a>
+                            </li>
+                        </foreach>
+                    </ul>
+                </div>
+            </div>
+            <div class="product-certificate">
+                <div class="product-content-title">
+                    Certificate
+                </div>
+                <div class="product-content-certificate">
+                    <ul>
+                        <foreach name="product.certificate" item="vo">
+                            <li class="product-content-certificate-item">
+                                <a href="{:cmf_get_image_url($vo.url)}" target="_blank"><img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}"></a>
+                            </li>
+                        </foreach>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- PRODUCT CONTENT END -->
+
     </div>
     <!--PRODUCT END-->
 
-
+    <include file="public@foot"/>
 </body>
 </html>

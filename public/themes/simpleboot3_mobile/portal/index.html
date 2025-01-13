@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{$site_info.site_name|default=''}</title>
+  <meta name="keywords" content="{$site_info.site_name|default=''}">
+  <meta name="description" content="{$site_info.site_name|default=''}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <include file="public@head"/>
+  <link href="__TMPL__/public/assets/css/index.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="__TMPL__/public/assets/js/index.js"></script>
+</head>
+<body>
+<div class="main">
+  <include file="public@nav"/>
+  <!--BANNER START-->
+  <div class="banner">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <foreach name="slides" item="vo">
+          <div class="swiper-slide">
+            <img src="{:cmf_get_image_url($vo['image'])}" class="d-block w-100" alt="{$vo.title}">
+            <div class="swiper-slide-title">{$vo.content}</div>
+          </div>
+        </foreach>
+      </div>
+      <!-- 分页器容器 -->
+      <div class="swiper-pagination swiper-pagination-bullets"></div>
+    </div>
+    <script>
+      var mySwiper = new Swiper('.swiper', {
+        autoplay: true,//可选选项，自动滑动
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true, // 允许点击分页器子弹切换幻灯片
+          // 自定义分页器渲染函数（可选）
+          renderBullet: function (index, className) {
+            // 你可以在这里添加自定义的HTML结构或样式
+            var index_text = index+1;
+            if (index <= 8) {
+              index_text = '0' + index_text;
+            }
+            return '<span class="' + className + '">' + index_text + '</span>';
+          },
+        },
+      })
+
+    </script>
+  </div>
+  <!--BANNER END-->
+
+  <!--PRODUCTS START-->
+  <div class="hot-products">
+    <div class="hot-products-title">HOT PRODUCTS</div>
+    <div class="hot-products-desc">{$index_site.products_description}</div>
+    <div class="swiper product-content">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <ul class="product-content-ul">
+            <foreach name="hot_products" item="vo" length="4">
+              <li class="product-content-li">
+                <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
+                  <div class="product-content-li-img">
+                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="product">
+                  </div>
+                  <div class="product-content-li-title">{$vo.title}</div>
+                </a>
+                <div class="product_list_item_btn">
+                  <div class="product_list_item_btn_submit" id="inquiry">SUBMIT</div>
+                  <if condition="!empty($vo['file']) || !empty($product_setting['product_file'])">
+                    <div class="product_list_item_btn_download" id="download" data-href="{:empty($product.file) ? cmf_get_file_download_url($product_setting.product_file.url) : cmf_get_file_download_url($product.file.url)}">DOWNLOAD</div>
+                  </if>
+                </div>
+              </li>
+            </foreach>
+          </ul>
+        </div>
+        <div class="swiper-slide">
+          <ul class="product-content-ul">
+            <foreach name="hot_products" item="vo" offset="4" length="4">
+              <li class="product-content-li">
+                <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
+                  <div class="product-content-li-img">
+                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="product">
+                  </div>
+                  <div class="product-content-li-title">{$vo.title}</div>
+                </a>
+                <div class="product_list_item_btn">
+                  <div class="product_list_item_btn_submit" id="inquiry">SUBMIT</div>
+                  <if condition="!empty($vo['file']) || !empty($product_setting['product_file'])">
+                    <div class="product_list_item_btn_download" id="download" data-href="{:empty($product.file) ? cmf_get_file_download_url($product_setting.product_file.url) : cmf_get_file_download_url($product.file.url)}">DOWNLOAD</div>
+                  </if>
+                </div>
+              </li>
+            </foreach>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="product-line"></div>
+    <script>
+      var mySwiper = new Swiper('.swiper', {
+        pagination: {
+          el: '.product-line',
+        },
+      })
+    </script>
+
+  </div>
+  <!--PRODUCTS END-->
+
+  <!--ABOUT US START-->
+  <div class="about">
+    <div class="about-title">ABOUT OUR COMPANY</div>
+    <div class="about-desc">{$index_site.about_description}</div>
+    <div class="about-content">
+      <ul>
+        <foreach name="index_site.engineering" item="vo">
+          <li class="about-content-item">
+            <p class="about-content-num">{$vo.engineering_num}</p>
+            <p class="about-content-title">{$vo.engineering_name}</p>
+            <p class="about-content-desc">{$vo.engineering_desc}</p>
+            <lt name="key" value=":count($index_site['engineering'])-1">
+              <div class="about-content-line"></div>
+            </lt>
+          </li>
+        </foreach>
+      </ul>
+    </div>
+    <div class="about-img">
+      <img src="{:cmf_get_image_url($index_site.about_img)}" alt="{$site_info.site_name}">
+    </div>
+  </div>
+  <!--ABOUT US END-->
+
+
+  <!--CHOOSE START-->
+  <div class="choose-warp">
+    <div class="choose">
+      <div class="choose-title">WHY CHOOSE US</div>
+      <div class="choose-desc">{$index_site.choose_description}</div>
+      <ul class="choose-list">
+        <foreach name="index_site.choose" item="vo">
+          <li class="choose-item">
+            <div class="choose-item-icon">
+              <img src="{:cmf_get_image_url($vo.choose_image)}" alt="choose" data-default_img="{:cmf_get_image_url($vo.choose_image)}" data-active_img="{:cmf_get_image_url($vo.choose_image_active)}">
+            </div>
+            <div class="choose-item-title">{$vo.choose_name}</div>
+            <div class="choose-item-desc">{$vo.choose_desc}</div>
+          </li>
+        </foreach>
+      </ul>
+    </div>
+  </div>
+  <!--CHOOSE END-->
+
+  <include file="public@foot"/>
+
+</div>
+</body>
+</html>

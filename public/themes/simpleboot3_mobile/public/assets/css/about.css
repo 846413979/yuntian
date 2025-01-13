@@ -1,0 +1,191 @@
+/***
+ * about styles
+ **/
+.about-content{
+    width: 35rem;
+    margin: 4rem auto;
+    font-family: Arial, Arial;
+    font-size: 1.2rem;
+    color: #333333;
+    line-height: 2rem;
+}
+.about-content .about_title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #333333;
+    line-height: 3rem;
+    text-align: center;
+    font-style: italic;
+}
+.about-content .top_content{
+    margin-top: 2rem;
+}
+.about-content .top_content .top_left_content{
+    width: 35rem;
+}
+.about-content .top_content .top_left_content .top_left_content_title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: #333333;
+    line-height: 3rem;
+    font-style: italic;
+}
+.about-content .top_content .top_left_content .top_left_content_text{
+}
+.about-content .top_content .top_right_content{
+    width: 35rem;
+    height: 16.4rem;
+}
+.about-content .top_content .top_right_content img{
+    width: 100%;
+    height: 100%;
+}
+.about-content .middle_content{
+    margin-top: 2rem;
+}
+.about-content .bottom_content{
+    margin-top: 2rem;
+}
+.about-content .bottom_content .bottom_left_content{
+    width: 35rem;
+    height: 19.6rem;
+}
+.about-content .bottom_content .bottom_left_content img{
+    width: 100%;
+    height: 100%;
+}
+.about-content .bottom_content .bottom_right_content{
+    margin-top: 1rem;
+}
+.about-content .bottom_content .bottom_right_content .bottom_right_content_title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: #333333;
+    line-height: 3rem;
+    font-style: italic;
+}
+.about-content .bottom_content .bottom_right_content .bottom_right_content_text{
+
+}
+.about-content .bottom_content .bottom_right_content .bottom_right_content_text .bottom_right_content_text_title{
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+
+/**
+* choose  styles
+***/
+.choose-warp{
+    width: 100%;
+    margin: 4rem auto 0;
+    padding: 4rem 0;
+    background: #F3F2F9;
+}
+.choose-warp .choose{
+    width: 37.5rem;
+    margin: 0 auto;
+}
+.choose .choose-title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 3rem;
+    color: #333333;
+    line-height: 4rem;
+    text-align: center;
+    font-style: italic;
+}
+.choose .choose-desc{
+    font-family: Arial, Arial;
+    font-size: 1.6rem;
+    color: #333333;
+    line-height: 2rem;
+    text-align: center;
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+.choose .choose-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.choose .choose-list .choose-item{
+    width: 18rem;
+    height: 30rem;
+    background-color: #FFFFFF;
+    margin-top: 2rem;
+    padding: 1rem;
+
+}
+.choose .choose-list .choose-item .choose-item-icon{
+    width: 5rem;
+    height: 5rem;
+    overflow: hidden;
+}
+.choose .choose-list .choose-item .choose-item-icon img{
+    width: 100%;
+    height: 100%;
+    transition: transform 1s ease;
+}
+.choose .choose-list .choose-item .choose-item-icon img.rotated {
+    transform: rotateY(360deg);
+}
+.choose .choose-list .choose-item .choose-item-title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #333333;
+    line-height: 2.4rem;
+    margin-top: 2rem;
+}
+.choose .choose-list .choose-item .choose-item-desc{
+    font-family: Arial, Arial;
+    font-size: 1.4rem;
+    color: #333333;
+    line-height: 2rem;
+    margin-top: 1rem;
+}
+.choose .choose-list .choose-item.active{
+    background: #2980D3;
+}
+.choose .choose-list .choose-item.active .choose-item-title,
+.choose .choose-list .choose-item.active .choose-item-desc{
+    color: #FFFFFF;
+}
+
+/**
+ * certificate styles
+ ***/
+.certificate{
+    width: 35rem;
+    margin: 4rem auto;
+}
+.certificate .certificate-title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #333333;
+    line-height: 4rem;
+    text-align: center;
+    font-style: italic;
+}
+.certificate .certificate-list{
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+.certificate .certificate-list .certificate-item{
+    margin: 0 0.25rem;
+    cursor: pointer;
+    width: 17rem;
+    height: 24rem;
+}
+.certificate .certificate-list .certificate-item img{
+    width: 100%;
+    height: 100%;
+}

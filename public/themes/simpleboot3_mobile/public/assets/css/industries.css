@@ -1,0 +1,111 @@
+.main-content .products-content-select{
+    width: 35rem;
+    margin: 2rem auto;
+}
+.main-content .products-content_title{
+    font-family: Roboto, Roboto;
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: #333333;
+    line-height: 2rem;
+    font-style: italic;
+}
+.main-content .products-content-select .product_select select{
+    /*width: 35rem;*/
+    height: 4rem;
+    border: 0.1rem solid #DCDCDC;
+    border-radius: 0.4rem;
+    margin-bottom: 2rem;
+    font-family: Roboto, Roboto;
+    font-size: 1.4rem;
+    color: #999999;
+    line-height: 2.8rem;
+    padding-left: 2rem;
+    float: left;
+    margin-top: 2rem;
+}
+.main-content .products-content-select .tonnage_select select{
+    width: 13rem;
+    margin-left: 2rem;
+}
+.product_industry .product_industry_title{
+    font-family: Roboto, Roboto;
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: #333333;
+    line-height: 2rem;
+    font-style: italic;
+}
+.product_industry .product_industry_list{
+    margin-top: 2rem;
+}
+.product_industry .product_industry_list .product_industry_list_item{
+    width: 16.5rem;
+    height: 4rem;
+    background: #FFFFFF;
+    border-radius: 4px 4px 4px 4px;
+    border: 1px solid #DCDCDC;
+    float: left;
+    margin-right: 2rem;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+    font-family: Roboto, Roboto;
+    font-size: 1.4rem;
+    color: #999999;
+    line-height: 4rem;
+    text-align: center;
+}
+.product_industry .product_industry_list .product_industry_list_item:nth-child(2n){
+    margin-right: 0;
+}
+.product_industry .product_industry_list .product_industry_list_item.active{
+    border: 1px solid #003F9B;
+    color: #003F9B;
+}
+
+
+/**** product list style ****/
+.product_list_warp{
+    width: 35rem;
+    height: auto;
+    margin: 2rem auto;
+}
+.product_list{
+    display: flex;
+    flex-wrap: wrap;
+}
+.product_list .product_item{
+    width: 17rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+.product_list .product_item:nth-child(2n){
+    margin-right: 0;
+}
+.product_list .product_item .product_list_item_img{
+    width: 100%;
+    height: 15rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+.product_list .product_item .product_list_item_img img{
+    width: 100%;
+    height: 100%;
+}
+.product_list .product_item .product_list_item_title{
+    font-family: Arial, Arial;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #333333;
+    line-height: 2rem;
+    height: 2rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.products-content-right-page{
+    display: flex;
+    justify-content: center;
+}

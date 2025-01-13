@@ -1,0 +1,81 @@
+.main-content{
+    max-width: 37.5rem;
+    margin: 2rem auto;
+    font-family: Arial, Arial;
+    font-size: 1.2rem;
+    color: #333333;
+    line-height: 2rem;
+}
+.title{
+    font-weight: bold;
+    font-size: 3rem;
+    color: #333333;
+    line-height: 3rem;
+    text-align: center;
+    font-style: italic;
+}
+.contact{
+    margin-top: 2rem;
+    display: flex;
+}
+.contact .contact-left{
+    width: 100%;
+    background-color: #2980D3;
+    padding: 0 2rem;
+}
+.contact .contact-left .contact-left-title{
+    font-weight: bold;
+    font-size: 2.8rem;
+    color: #FFFFFF;
+    line-height: 3rem;
+    font-style: italic;
+    margin: 2rem 0;
+}
+.contact .contact-left .contact-left-content{
+    font-size: 1.4rem;
+    color: #FFFFFF;
+    line-height: 2rem;
+}
+.contact .contact-left .contact-left-content img{
+    width: 1.4rem;
+    height: 1.4rem;
+    float: left;
+    margin-top: 0.2rem;
+}
+.contact .contact-left .contact-left-content a p{
+    margin-left: 3rem;
+}
+
+.quote{
+    width: 35rem;
+    margin: 1rem auto;
+}
+.quote input,.quote textarea{
+    border: 1px solid #ECECEC;
+    border-radius: 2rem;
+    outline: none;
+    padding-left: 1rem;
+    line-height: 4rem;
+    width: 35rem;
+    margin-top: 1rem;
+}
+
+.quote .quote-message{
+    height: 24rem;
+    resize: none;
+}
+.quote input::placeholder,.quote textarea::placeholder{
+    color: #333333;
+}
+.quote .quote-btn{
+    width: 20rem;
+    height: 5rem;
+    background: #1562C5;
+    border-radius: 2.5rem;
+    font-family: Trade Gothic Next LT Pro, Trade Gothic Next LT Pro;
+    font-size: 1.8rem;
+    color: #FFFFFF;
+    line-height: 5rem;
+    text-align: center;
+    margin: 1rem auto 0;
+}

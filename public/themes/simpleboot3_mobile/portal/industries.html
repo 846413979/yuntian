@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/industries.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/industries.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/imagePreview.min.js"></script>
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+
+
+<div class="main-content">
+    <div class="products-content-select">
+        <div class="products-content_title">Products:</div>
+        <div class="product_select">
+            <select name="category_id" id="product_category">
+                <option value="0" data-url="{:cmf_url('portal/index/industries')}">All Products</option>
+                <foreach name="category_list" item="vo">
+                    <option value="{$vo.id}" data-url="{:cmf_url('portal/index/industries',array('id'=>$vo['id']))}"
+                            {$vo['id']==$parent_id ? 'selected' : ''}>{$vo.name}</option>
+                </foreach>
+            </select>
+        </div>
+
+        <div class="clear_both"></div>
+        <div class="product_industry">
+            <div class="product_industry_title">Industry Application:</div>
+            <ul class="product_industry_list clearfix">
+                <foreach name="profession_list" item="vo">
+                    <li class="product_industry_list_item {$vo.checked ? 'active' : ''}" data-id="{$vo.id}">
+                        {$vo.name}
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- product list -->
+    <div class="product_list_warp">
+        <ul class="product_list clearfix">
+            <foreach name="list" item="vo">
+                <foreach name="vo.case" item="v">
+                    <li class="product_item">
+                        <div class="product_list_item_img">
+                            <img src="{:cmf_get_image_url($v['url'])}" alt="{$v.name}">
+                        </div>
+                        <div class="product_list_item_title">{$v.name}</div>
+                    </li>
+                </foreach>
+            </foreach>
+        </ul>
+        <script>
+            ImagePreview.init({id:$(".product_list .product_item .product_list_item_img img")});
+        </script>
+        <!-- page -->
+        <div class="products-content-right-page">
+            <ul class="pagination">{$page}</ul>
+        </div>
+    </div>
+
+</div>
+
+<include file="public@foot"/>
+
+</body>
+</html>

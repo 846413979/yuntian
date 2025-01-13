@@ -35,10 +35,6 @@ $(document).ready(function(){
 
     /*** 搜索框点击 ***/
     $('#product_search').click(function (){
-        if ($('.search_input').val() === '') {
-            return false;
-        }
-
         change();
     })
 
@@ -59,6 +55,9 @@ $(document).ready(function(){
         if ($('.category_item_list_item').hasClass('active')) {
             url = $('.category_item_list_item.active').data('url');
         }
+        if(!url){
+            url = $('.category_list').data('url');
+        }
 
 
         $.ajax({
@@ -67,7 +66,6 @@ $(document).ready(function(){
             data: data,
             dataType: 'json',
             success: function (res) {
-                console.log(res)
                 if (res.code === 0) {
                     alert(res.msg)
                 }
@@ -82,12 +80,14 @@ $(document).ready(function(){
                         '<div class="product_list_item_title">' +
                         list[i].title +
                         '</div>' +
-                        '<div class="product_list_item_category">' +
-                        'Category—' +
-                        list[i].category.name +
-                        '</div>' +
                         '</a>' +
-                        '</li>'
+                        '<div class="product_list_item_btn">' +
+                        '<div class="product_list_item_btn_submit" id="inquiry">SUBMIT</div>';
+                    if (list[i].file.length!==0){
+                        html += '<div class="product_list_item_btn_download" id="download" data-href="'+list[i].file.url+'">DOWNLOAD</div>';
+                    }
+                    html += '</div>' +
+                        '</li>';
                 }
                 $('.product_list').html(html)
 
@@ -95,6 +95,18 @@ $(document).ready(function(){
             }
         })
     }
+
+
+    $(document).on('click','#inquiry',function (){
+        $('#feedback_type').val(1);
+        $('.popover_wrap').show();
+    })
+
+    $(document).on('click','#download',function (){
+        $('#feedback_type').val(1);
+        $('#file').val($(this).data('href'));
+        $('.popover_wrap').show();
+    })
 
 
 });

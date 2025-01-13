@@ -1,5 +1,7 @@
 <?php
 return array (
+  'ADMIN_ABOUT_DEFAULT' => '页面设置',
+  'ADMIN_ABOUT_SITE' => '关于我们',
   'ADMIN_API_IMPORT' => '后台API导入',
   'ADMIN_APP_INDEX' => '应用管理',
   'ADMIN_APP_INSTALL' => '应用安装',
@@ -36,6 +38,7 @@ return array (
   'ADMIN_MENU_INDEX' => '后台菜单',
   'ADMIN_MENU_LISTORDER' => '后台菜单排序',
   'ADMIN_MENU_LISTS' => '所有菜单',
+  'ADMIN_MESSAGE_INDEX' => '消息管理',
   'ADMIN_NAV_ADD' => '添加导航',
   'ADMIN_NAV_ADDPOST' => '添加导航提交保存',
   'ADMIN_NAV_DELETE' => '删除导航',
@@ -58,6 +61,7 @@ return array (
   'ADMIN_PLUGIN_TOGGLE' => '插件启用禁用',
   'ADMIN_PLUGIN_UNINSTALL' => '卸载插件',
   'ADMIN_PLUGIN_UPDATE' => '插件更新',
+  'ADMIN_QUOTE_SITE' => '询价',
   'ADMIN_RBAC_APIAUTHORIZE' => '设置角色后台API权限',
   'ADMIN_RBAC_APIAUTHORIZEPOST' => '设置角色后台API权限提交',
   'ADMIN_RBAC_AUTHORIZE' => '设置角色权限',

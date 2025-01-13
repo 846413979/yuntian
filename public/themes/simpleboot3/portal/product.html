@@ -20,18 +20,18 @@
 <div class="main-content clearfix">
     <div class="search_warp">
         <!-- products category -->
-        <div class="category">
+        <div class="search_item category">
             <div class="category_title">PRODUCTS</div>
             <div class="category_line"></div>
             <div class="category_search clearfix">
-                <input type="text" class="search_input" placeholder="search">
+                <input type="text" class="search_input" placeholder="search" value="{:input('keywords')}">
                 <div class="search_btn" id="product_search">
                     <img src="__TMPL__/public/assets/images/search.png" alt="search">
                 </div>
             </div>
-            <ul class="category_list">
+            <ul class="category_list" data-url="{:cmf_url('portal/index/product')}">
                 <foreach name="category_list" item="vo">
-                    <li class="category_item {$vo['id']==$parent_id ? 'active' : ''}" data-url="{:cmf_url('product',array('id'=>$vo.id))}">
+                    <li class="category_item {$vo['id']==$parent_id ? 'active' : ''}" data-url="{:cmf_url('portal/index/product',array('id'=>$vo.id))}">
                         <div class="category_item_title">
                             {$vo.name}
                             <div class="category_item_icon"></div>
@@ -39,7 +39,7 @@
                         <div class="category_item_list {$vo['id']==$parent_id ? 'show' : ''}">
                             <ul>
                                 <foreach name="vo['children']" item="v">
-                                    <li class="category_item_list_item {:input('id')==$v.id ? 'active' : ''}" data-url="{:cmf_url('product',array('id'=>$v.id))}">{$v.name}</li>
+                                    <li class="category_item_list_item {:input('id')==$v.id ? 'active' : ''}" data-url="{:cmf_url('portal/index/product',array('id'=>$v.id))}">{$v.name}</li>
                                 </foreach>
                             </ul>
                         </div>
@@ -49,7 +49,7 @@
         </div>
 
         <!-- industries -->
-        <div class="industries">
+        <div class="search_item industries">
             <div class="industries_title">INDUSTRIES</div>
             <div class="industries_line"></div>
             <ul class="industries_list">
@@ -66,13 +66,18 @@
         <ul class="product_list clearfix">
             <foreach name="list" item="vo">
                 <li class="product_item">
-                    <a href="{:cmf_url('product_info',array('id'=>$vo['id']))}">
+                    <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
                         <div class="product_list_item_img">
                             <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}">
                         </div>
                         <div class="product_list_item_title">{$vo.title}</div>
-                        <div class="product_list_item_category">Category—{$vo.category.name}</div>
                     </a>
+                    <div class="product_list_item_btn">
+                        <div class="product_list_item_btn_submit" id="inquiry">SUBMIT</div>
+                        <if condition="!empty($vo['file']) || !empty($product_setting['product_file'])">
+                            <div class="product_list_item_btn_download" id="download" data-href="{:empty($product.file) ? cmf_get_file_download_url($product_setting.product_file.url) : cmf_get_file_download_url($product.file.url)}">DOWNLOAD</div>
+                        </if>
+                    </div>
                 </li>
             </foreach>
         </ul>

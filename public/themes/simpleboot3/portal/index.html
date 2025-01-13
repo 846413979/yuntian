@@ -20,7 +20,7 @@
             <foreach name="slides" item="vo">
                 <div class="swiper-slide">
                     <img src="{:cmf_get_image_url($vo['image'])}" class="d-block w-100" alt="{$vo.title}">
-                    <div class="swiper-slide-title">{$vo.content}</div>
+                    <div class="swiper-slide-title {$key==0 ? 'swiper-slide-first-title' : ''}">{$vo.content}</div>
                 </div>
             </foreach>
         </div>
@@ -58,13 +58,18 @@
     <ul class="hot-products-list">
         <foreach name="hot_products" item="vo">
             <li class="hot-products-item">
-                <a href="{:cmf_url('product/index',array('id'=>$vo['id']))}">
+                <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
                     <div class="hot-products-item-img">
                         <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}">
                     </div>
                     <div class="hot-products-item-title">{$vo.title}</div>
-                    <div class="hot-products-item-desc">Category—{$vo.category.name}</div>
                 </a>
+                <div class="product_list_item_btn">
+                    <div class="product_list_item_btn_submit" id="inquiry">SUBMIT</div>
+                    <if condition="!empty($vo['file']) || !empty($product_setting['product_file'])">
+                        <div class="product_list_item_btn_download" id="download" data-href="{:empty($product.file) ? cmf_get_file_download_url($product_setting.product_file.url) : cmf_get_file_download_url($product.file.url)}">DOWNLOAD</div>
+                    </if>
+                </div>
             </li>
         </foreach>
     </ul>

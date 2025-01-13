@@ -126,6 +126,13 @@ class AdminProductController extends AdminBaseController
             }
         }
 
+        if (!empty($data['case_names']) && !empty($data['case_urls'])) {
+            $data['case'] = [];
+            foreach ($data['case_urls'] as $key => $url) {
+                $photoUrl = cmf_asset_relative_url($url);
+                array_push($data['case'], ["url" => $photoUrl, "name" => $data['case_names'][$key]]);
+            }
+        }
 
         if (!empty($data['certificate_names']) && !empty($data['certificate_urls'])) {
             $data['certificate'] = [];
@@ -151,11 +158,36 @@ class AdminProductController extends AdminBaseController
             }
         }
 
+
+        if(!empty($data['sling_available'])){
+            $sling_available = $data['sling_available'];
+            $data['sling_available'] = [];
+            foreach ($sling_available as $key => $value){
+                $data['sling_available'][] = ['url'=>$product_setting['sling_available'][$value]['url']??'','active_url'=>$product_setting['sling_available_active'][$value]['url']??'','name'=>$product_setting['sling_available'][$value]['name']??''];
+            }
+        }
+
         if(!empty($data['job_level']) && !$this->checkEmpty($data['job_level'])){
             $this->error('工作等级不能为空值');
         }
-
-        $data['input_field'] = implode(',',$data['input_field']);
+        if(!empty($data['operating_voltage']) && !$this->checkEmpty($data['operating_voltage'])){
+            $this->error('工作电压不能为空值');
+        }
+        if(!empty($data['operating_hertz']) && !$this->checkEmpty($data['operating_hertz'])){
+            $this->error('工作频率不能为空值');
+        }
+        if (!empty($data['input_field'])){
+            $data['input_field'] = implode(',',$data['input_field']);
+        }
+        if (!empty($data['operating_voltage'])){
+            $data['operating_voltage'] = implode(',',$data['operating_voltage']);
+        }
+        if (!empty($data['operating_hertz'])){
+            $data['operating_hertz'] = implode(',',$data['operating_hertz']);
+        }
+        if (!empty($data['arm_type'])){
+            $data['arm_type'] = implode(',',$data['arm_type']);
+        }
 
 
         $model = new ProductModel();
@@ -253,6 +285,14 @@ class AdminProductController extends AdminBaseController
             }
         }
 
+        if (!empty($data['case_names']) && !empty($data['case_urls'])) {
+            $data['case'] = [];
+            foreach ($data['case_urls'] as $key => $url) {
+                $photoUrl = cmf_asset_relative_url($url);
+                array_push($data['case'], ["url" => $photoUrl, "name" => $data['case_names'][$key]]);
+            }
+        }
+
         if (!empty($data['certificate_names']) && !empty($data['certificate_urls'])) {
             $data['certificate'] = [];
             foreach ($data['certificate_urls'] as $key => $url) {
@@ -267,7 +307,6 @@ class AdminProductController extends AdminBaseController
                 'name' => $data['file_name']
             ];
         }
-//        var_dump($data['files']);exit();
 
         $product_setting = cmf_get_option('product_setting');
 
@@ -279,10 +318,35 @@ class AdminProductController extends AdminBaseController
             }
         }
 
+        if(!empty($data['sling_available'])){
+            $sling_available = $data['sling_available'];
+            $data['sling_available'] = [];
+            foreach ($sling_available as $key => $value){
+                $data['sling_available'][] = ['url'=>$product_setting['sling_available'][$value]['url']??'','active_url'=>$product_setting['sling_available_active'][$value]['url']??'','name'=>$product_setting['sling_available'][$value]['name']??''];
+            }
+        }
+
         if(!empty($data['job_level']) && !$this->checkEmpty($data['job_level'])){
             $this->error('工作等级不能为空值');
         }
-        $data['input_field'] = implode(',',$data['input_field']);
+        if(!empty($data['operating_voltage']) && !$this->checkEmpty($data['operating_voltage'])){
+            $this->error('工作电压不能为空值');
+        }
+        if(!empty($data['operating_hertz']) && !$this->checkEmpty($data['operating_hertz'])){
+            $this->error('工作频率不能为空值');
+        }
+        if (!empty($data['input_field'])){
+            $data['input_field'] = implode(',',$data['input_field']);
+        }
+        if (!empty($data['operating_voltage'])){
+            $data['operating_voltage'] = implode(',',$data['operating_voltage']);
+        }
+        if (!empty($data['operating_hertz'])){
+            $data['operating_hertz'] = implode(',',$data['operating_hertz']);
+        }
+        if (!empty($data['arm_type'])){
+            $data['arm_type'] = implode(',',$data['arm_type']);
+        }
 
 //        var_dump($data);exit;
 

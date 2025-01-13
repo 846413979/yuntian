@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/product-info.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/product-info.js"></script>
+</head>
+<body>
+<div class="main">
+    <include file="public@nav"/>
+
+    <include file="public@banner"/>
+
+    <div class="main-content">
+
+        <div class="product-info clearfix">
+            <!-- title -->
+            <div class="product-title">{$product.title}</div>
+            <!-- photos -->
+            <div class="product-photos">
+                <div class="swiper mySwiper2">
+                    <div class="swiper-wrapper main-image">
+                        <foreach name="product.photos" item="vo">
+                            <div class="swiper-slide">
+                                <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}"/>
+                            </div>
+                        </foreach>
+                    </div>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper thumb-image">
+                        <foreach name="product.photos" item="vo">
+                            <div class="swiper-slide">
+                                <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}"/>
+                            </div>
+                        </foreach>
+                    </div>
+                </div>
+
+                <script>
+                    var swiper = new Swiper(".mySwiper", {
+                        spaceBetween: 10,
+                        slidesPerView: 4,
+                        watchSlidesProgress: true,
+                    });
+                    var swiper2 = new Swiper(".mySwiper2", {
+                        spaceBetween: 10,
+                        thumbs: {
+                            swiper: swiper,
+                        },
+                    });
+                </script>
+            </div>
+
+            <div class="info_middle_box">
+                <notempty name="product.lifting_capacity">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Capacity:</div>
+                        <div class="item_content">{$product.lifting_capacity}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.lifting_height">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Lifting Height:</div>
+                        <div class="item_content">{$product.lifting_height}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.span">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Span:</div>
+                        <div class="item_content">{$product.span}</div>
+                    </div>
+                </notempty>
+                <if condition="!empty($product['operating_voltage']) && !empty($product['operating_hertz'])">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Voltage/Hertz:</div>
+                        <div class="item_content">According to your demands</div>
+                    </div>
+                </if>
+                <notempty name="product.job_level">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Working Class:</div>
+                        <div class="item_content">{:implode(',',$product['job_level'])}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.ship_width">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Dock Width:</div>
+                        <div class="item_content">{$product['ship_width']}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.work_radius">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Outreach:</div>
+                        <div class="item_content">{$product['work_radius']}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.gauge">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Gauge:</div>
+                        <div class="item_content">{$product.gauge}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.draft_depth">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Draft Depth:</div>
+                        <div class="item_content">{$product.draft_depth}</div>
+                    </div>
+                </notempty>
+                <notempty name="product.arm_type">
+                    <div class="info_middle_line"></div>
+                    <div class="info_middle_item">
+                        <div class="item_title">Arm Type:</div>
+                        <div class="item_content">{$product.arm_type}</div>
+                    </div>
+                </notempty>
+                <div class="info_middle_line"></div>
+                <if condition="!empty($product['file']) || !empty($product_setting['product_file'])">
+                    <div class="info_middle_file" id="download" data-href="{!empty($product.file) ? $product.file : $product_setting.product_file.file}">
+                        <img class="file" src="__TMPL__/public/assets/images/file.webp" alt="file">
+                        Product manual
+                        <img class="download" src="__TMPL__/public/assets/images/download.webp" alt="download">
+                    </div>
+                </if>
+                <div class="info_middle_apply">
+                    <span>Apply:</span> {$product.industry}
+                </div>
+                <notempty name="product.authentication_mark">
+                    <div class="info_middle_mark">
+                        <span class="info_middle_mark_title">
+                            Authentication mark:
+                        </span>
+                        <foreach name="product.authentication_mark" item="vo">
+                            <div class="info_middle_mark_img">
+                                <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
+                            </div>
+                        </foreach>
+                    </div>
+                </notempty>
+            </div>
+
+            <!-- argument -->
+            <div class="info_right_box clearfix">
+                <div class="info_right_tips">
+                    Submit your demands:
+                </div>
+                <php>
+                    $input_field = explode(',',$product['input_field']);
+                </php>
+                <if condition="in_array('lifting_capacity',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Capacity:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="lifting_capacity" placeholder="Please enter the required capacity">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('lifting_height',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Lifting Height:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="lifting_height" placeholder="Please enter the required height">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('span',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Span:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="span" placeholder="Please enter the required span">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('operating_voltage',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Voltage/Hertz:
+                        </div>
+                        <div class="info_right_item_content">
+                            <select class="info_right_item_content_select" name="voltage">
+                                <foreach name="product_setting.operating_voltage" item="vo">
+                                    <option value="{$vo}">{$vo}</option>
+                                </foreach>
+                            </select>
+                            <select class="info_right_item_content_select" name="hertz">
+                                <foreach name="product_setting.operating_hertz" item="vo">
+                                    <option value="{$vo}">{$vo}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('job_level',$input_field)">
+                    <div class="info_right_item info_right_item_checkbox">
+                        <div class="info_right_item_title">
+                            Working Class:
+                        </div>
+                        <div class="info_right_item_content">
+                            <ul class="clearfix">
+                                <foreach name="product.job_level" item="vo">
+                                    <li class="info_right_item_content_level {$key==0 ? 'active' : ''}" data-level="{$vo}">{$vo}</li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('ship_width',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Dock Width:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="ship_width" placeholder="Please enter the required dock width">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('work_radius',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Outreach:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="work_radius" placeholder="Please enter the required outreach">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('gauge',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Gauge:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="gauge" placeholder="Please enter the required gauge">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('draft_depth',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Draft Depth:
+                        </div>
+                        <div class="info_right_item_content">
+                            <input type="text" name="draft_depth" placeholder="Please enter the required draft depth">
+                        </div>
+                    </div>
+                </if>
+                <if condition="in_array('arm_type',$input_field)">
+                    <div class="info_right_item">
+                        <div class="info_right_item_title">
+                            Arm Type:
+                        </div>
+                        <div class="info_right_item_content">
+                            <php>
+                                $arm_type = explode(',',$product['arm_type']);
+                            </php>
+                            <select class="info_right_item_content_select info_right_item_content_select_arm_type" name="arm_type">
+                                <foreach name="arm_type" item="vo">
+                                    <option value="{$vo}">{$vo}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                    </div>
+                </if>
+                <!--button-->
+                <div class="info_right_btn info_right_submit" id="inquiry">SUBMIT</div>
+                <div class="info_right_btn info_right_chat">ONLINE CHAT</div>
+            </div>
+
+
+            <!-- PRODUCT RECOMMENDATION -->
+            <div class="related_products clearfix">
+                <div class="content-title">
+                    HOT PRODUCTS
+                </div>
+                <div class="swiper product-content">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <ul class="product-content-ul">
+                                <foreach name="recommended_list" item="vo" length="4">
+                                    <li class="product-content-li">
+                                        <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
+                                            <div class="product-content-li-img">
+                                                <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="product">
+                                            </div>
+                                            <div class="product-content-li-title">{$vo.title}</div>
+                                        </a>
+                                        <div class="product_list_item_btn">
+                                            <div class="product_list_item_btn_submit" id="inquiry1">SUBMIT</div>
+                                            <if condition="!empty($vo['file']) || !empty($product_setting['product_file'])">
+                                                <div class="product_list_item_btn_download" id="download1" data-href="{:empty($product.file) ? cmf_get_file_download_url($product_setting.product_file.url) : cmf_get_file_download_url($product.file.url)}">DOWNLOAD</div>
+                                            </if>
+                                        </div>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="product-line"></div>
+                <script>
+                    var mySwiper = new Swiper('.product-content', {
+                        pagination: {
+                            el: '.product-line',
+                        },
+                    })
+                </script>
+            </div>
+
+            <!-- info -->
+            <div class="info_content">
+                <ul class="info_content_title">
+                    <li class="info_content_item active">
+                        Product Overview
+                    </li>
+                    <li class="info_content_item">
+                        Application Scenario
+                    </li>
+                    <li class="info_content_item">
+                        Certificate
+                    </li>
+                </ul>
+                <div class="info_content_content">
+                    <div class="info_content_content_item">
+                        {$product.overview}
+                    </div>
+                    <div class="info_content_content_item"
+                         style="display: none;">
+                        {$product.scenario}
+                        <ul class="info_content_content_case">
+                            <foreach name="product.case" item="vo">
+                                <li class="info_content_content_case_item">
+                                    <a href="{:cmf_get_image_url($vo.url)}" target="_blank"><div class="case_wrap">
+                                        <img src="{:cmf_get_image_url($vo.url)}"
+                                             alt="{$vo.name}" title="{$vo.name}"></div>
+                                    <div class="info_content_content_case_item_title">
+                                        {$vo.name}
+                                    </div>
+                                    </a>
+                                </li>
+                            </foreach>
+                            <div class="clear_both"></div>
+                        </ul>
+                    </div>
+                    <div class="info_content_content_item"
+                         style="display: none;">
+                        <ul class="info_content_content_certificate">
+                            <foreach name="product.certificate" item="vo">
+                                <li class="info_content_content_certificate_item">
+                                    <a href="{:cmf_get_image_url($vo.url)}" target="_blank"><div class="certificate_wrap">
+                                        <img src="{:cmf_get_image_url($vo.url)}"
+                                             alt="{$vo.name}" title="{$vo.name}"></div>
+                                    <div class="info_content_content_certificate_item_title">
+                                        {$vo.name}
+                                    </div>
+                                    </a>
+                                </li>
+                            </foreach>
+                            <div class="clear_both"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <include file="public@foot"/>
+
+</div>
+
+</body>
+</html>

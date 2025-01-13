@@ -1,0 +1,159 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+
+    .btn-cancel-thumbnail {
+        margin-top: 5px;
+    }
+
+    #photos, #files {
+        margin-bottom: 0;
+    }
+</style>
+<script type="text/html" id="photos-item-tpl">
+    <li id="saved-image{id}">
+        <input id="photo-{id}" type="hidden" name="photo_urls[]" value="{filepath}">
+        <input class="form-control" id="photo-{id}-name" type="text" name="photo_names[]" value="{name}"
+               style="width: 200px;" title="图片名称">
+        <img id="photo-{id}-preview" src="{url}" style="height:34px;width: 44px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a class="btn btn-default" href="javascript:uploadOneImage('图片上传','#photo-{id}');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-image{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-image{id}').before($('#saved-image{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab">公司介绍</a></li>
+    </ul>
+    <form class="form-horizontal js-ajax-form margin-top-20" role="form" action="{:url('About/sitePost')}"
+          method="post">
+        <div class="tabbable">
+            <div class="tab-content">
+                <div class="form-group">
+                    <label for="input-top_title" class="col-sm-2 control-label">上部标题</label>
+                    <div class="col-md-6 col-sm-10">
+                        <textarea class="form-control" id="input-top_title" name="top_title" style="height: 100px;"
+                                  placeholder="请填写上部标题">{$site_info.top_title|default=''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-top_text" class="col-sm-2 control-label">上部内容</label>
+                    <div class="col-md-6 col-sm-10">
+                        <textarea class="form-control" id="input-top_text" name="top_text" style="height: 100px;"
+                                  placeholder="请填写上部内容">{$site_info.top_text|default=''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上部图片</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input type="hidden" name="top_image" id="top_image"
+                               value="{$site_info.top_image|default=''}">
+                        <a href="javascript:uploadOneImage('图片上传','#top_image');">
+                            <if condition="empty($site_info.top_image)">
+                                <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                     id="top_image-preview"
+                                     width="135" style="cursor: pointer"/>
+                                <else/>
+                                <img src="{:cmf_get_image_preview_url($site_info.top_image)}"
+                                     id="top_image-preview"
+                                     width="135" style="cursor: pointer"/>
+                            </if>
+                        </a>
+                        <input type="button" class="btn btn-sm" onclick="$('#top_image-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#top_image').val('');return false;"
+                               value="取消图片">
+                        <p class="help-block">建议尺寸：630*296</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-middle_text" class="col-sm-2 control-label">中部内容</label>
+                    <div class="col-md-6 col-sm-10">
+                        <textarea class="form-control" id="input-middle_text" name="middle_text" style="height: 100px;"
+                                  placeholder="请填写中部内容">{$site_info.middle_text|default=''}</textarea>
+                        <p class="help-block">如需换行输入 &lt;br&gt;</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">下部图片</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input type="hidden" name="bottom_image" id="bottom_image"
+                               value="{$site_info.bottom_image|default=''}">
+                        <a href="javascript:uploadOneImage('图片上传','#bottom_image');">
+                            <if condition="empty($site_info.bottom_image)">
+                                <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                     id="bottom_image-preview"
+                                     width="135" style="cursor: pointer"/>
+                                <else/>
+                                <img src="{:cmf_get_image_preview_url($site_info.bottom_image)}"
+                                     id="bottom_image-preview"
+                                     width="135" style="cursor: pointer"/>
+                            </if>
+                        </a>
+                        <input type="button" class="btn btn-sm" onclick="$('#bottom_image-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#bottom_image').val('');return false;"
+                               value="取消图片">
+                        <p class="help-block">建议尺寸：630*353</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-essence" class="col-sm-2 control-label">企业文化</label>
+                    <div class="col-md-6 col-sm-10">
+                        精髓：<textarea class="form-control" id="input-essence" name="essence" style="height: 50px;"
+                                  placeholder="请填写企业文化精髓">{$site_info.essence|default=''}</textarea>
+                        <br/>
+                        工作方法：<textarea class="form-control" id="input-working_methods" name="working_methods" style="height: 50px;"
+                                       placeholder="请填写工作方法">{$site_info.working_methods|default=''}</textarea>
+                        <br/>
+                        团队意识：<textarea class="form-control" id="input-wolves_spirit" name="wolves_spirit" style="height: 50px;"
+                                       placeholder="请填写团队意识">{$site_info.wolves_spirit|default=''}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">证书</label>
+                    <div class="col-md-6 col-sm-10">
+                        <ul id="photos" class="pic-list list-unstyled form-inline">
+                            <notempty name="site_info.certificate_images">
+                                <foreach name="site_info.certificate_images" item="vo">
+                                    <php>$img_url=cmf_get_image_preview_url($vo['url']);</php>
+                                    <li id="saved-image{$key}">
+                                        <input id="photo-{$key}" type="hidden" name="photo_urls[]"
+                                               value="{$vo.url}">
+                                        <input class="form-control" id="photo-{$key}-name" type="text"
+                                               name="photo_names[]"
+                                               value="{$vo.name|default=''}" style="width: 200px;" title="图片名称">
+                                        <img id="photo-{$key}-preview"
+                                             src="{:cmf_get_image_preview_url($vo['url'])}"
+                                             style="height:34px;width: 44px;"
+                                             onclick="parent.imagePreviewDialog(this.src);">
+                                        <a class="btn btn-default"  href="javascript:uploadOneImage('图片上传','#photo-{$key}');"><i class="fa fa-upload fa-fw"></i></a>
+                                        <a class="btn btn-danger"  href="javascript:(function(){$('#saved-image{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                        <a class="btn btn-success"  href="javascript:(function(){$('#saved-image{$key}').before($('#saved-image{$key}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:uploadMultiImage('图片上传','#photos','photos-item-tpl');"
+                           class="btn btn-default">选择图片</a>
+                        <p class="help-block">建议尺寸：274*387</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">
+                            {:lang('SAVE')}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+</body>
+</html>

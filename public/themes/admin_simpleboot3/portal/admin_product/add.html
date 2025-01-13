@@ -159,9 +159,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>起重高度</th>
+                        <th>起升高度</th>
                         <td>
-                            <input class="form-control" type="text" name="lifting_height" value="" placeholder="请输入起重高度"/>
+                            <input class="form-control" type="text" name="lifting_height" value="" placeholder="请输入起升高度"/>
                         </td>
                     </tr>
                     <tr>
@@ -171,9 +171,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>电压/赫兹</th>
+                        <th>电压</th>
                         <td>
-                            <input class="form-control" type="text" name="operating_voltage" value="" placeholder="请输入"/>
+                            <ul id="operating_voltage" class="pic-list list-unstyled form-inline"></ul>
+                            <input type="hidden" id="js-operating_voltage-input">
+                            <a href="javascript:input_add('operating_voltage');" class="btn btn-default">添加工作电压</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>频率</th>
+                        <td>
+                            <ul id="operating_hertz" class="pic-list list-unstyled form-inline"></ul>
+                            <input type="hidden" id="js-operating_hertz-input">
+                            <a href="javascript:input_add('operating_hertz');" class="btn btn-default">添加工作频率</a>
                         </td>
                     </tr>
                     <tr>
@@ -188,13 +198,58 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>可配吊具</th>
+                        <td>
+                            <foreach name="sling_available" item="vo">
+                                <label>
+                                    <input class="js-check" type="checkbox" name="sling_available[]" value="{$key}">
+                                    {$vo.name}
+                                </label>
+                                <img src="{:cmf_get_image_url($vo.url)}" width="18" height="18" onclick="imagePreviewDialog(this.src);">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                            </foreach>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>船宽</th>
+                        <td>
+                            <input class="form-control" type="text" name="ship_width" value="" placeholder="请输入船宽"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>工作幅度半径</th>
+                        <td>
+                            <input class="form-control" type="text" name="work_radius" value="" placeholder="请输入工作幅度半径"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>轨距</th>
+                        <td>
+                            <input class="form-control" type="text" name="gauge" value="" placeholder="请输入轨距"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>吃水深度</th>
+                        <td>
+                            <input class="form-control" type="text" name="draft_depth" value="" placeholder="请输入吃水深度"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>臂的类型</th>
+                        <td>
+                            <ul id="arm_type" class="pic-list list-unstyled form-inline"></ul>
+                            <input type="hidden" id="js-arm_type-input">
+                            <a href="javascript:input_add('arm_type');" class="btn btn-default">添加臂的类型</a>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>可输入参数</th>
                         <td>
                             <label>
                                 <input class="js-check" type="checkbox" name="input_field[]" value="lifting_capacity"> 起重量&nbsp;&nbsp;&nbsp;&nbsp;
                             </label>
                             <label>
-                                <input class="js-check" type="checkbox" name="input_field[]" value="lifting_height"> 起重高度&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input class="js-check" type="checkbox" name="input_field[]" value="lifting_height"> 起升高度&nbsp;&nbsp;&nbsp;&nbsp;
                             </label>
                             <label>
                                 <input class="js-check" type="checkbox" name="input_field[]" value="span"> 跨度&nbsp;&nbsp;&nbsp;&nbsp;
@@ -204,6 +259,24 @@
                             </label>
                             <label>
                                 <input class="js-check" type="checkbox" name="input_field[]" value="job_level"> 工作等级&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <!--<label>
+                                <input class="js-check" type="checkbox" name="input_field[]" value="sling_available"> 吊具&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>-->
+                            <label>
+                                <input class="js-check" type="checkbox" name="input_field[]" value="ship_width"> 船宽&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <label>
+                                <input class="js-check" type="checkbox" name="input_field[]" value="work_radius"> 工作幅度半径&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <label>
+                                <input class="js-check" type="checkbox" name="input_field[]" value="gauge"> 轨距&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <label>
+                                <input class="js-check" type="checkbox" name="input_field[]" value="draft_depth"> 吃水深度&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <label>
+                                <input class="js-check" type="checkbox" name="input_field[]" value="arm_type"> 臂的类型&nbsp;&nbsp;&nbsp;&nbsp;
                             </label>
                         </td>
                     </tr>
@@ -244,6 +317,15 @@
                             <a href="javascript:uploadMultiImage('图片上传','#certificate','certificate-item-tpl');"
                                class="btn btn-default">选择图片</a>
                             <p class="help-block">建议尺寸：338*476</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>案例</th>
+                        <td>
+                            <ul id="case" class="pic-list list-unstyled form-inline"></ul>
+                            <a href="javascript:uploadMultiImage('图片上传','#case','case-item-tpl');"
+                               class="btn btn-default">选择图片</a>
+                            <p class="help-block">建议尺寸：496*330</p>
                         </td>
                     </tr>
                     <tr>

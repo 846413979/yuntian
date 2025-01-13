@@ -34,6 +34,7 @@ class ProductModel extends Model
         'sling_available' => 'array',
         'file' => 'array',
         'certificate' => 'array',
+        'case' => 'array',
     ];
 
     // 开启自动写入时间戳字段

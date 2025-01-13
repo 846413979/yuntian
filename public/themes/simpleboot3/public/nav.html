@@ -6,19 +6,19 @@
             <ul>
                 <li>
                     <div class="header-up-right-item-search">
-                        <input type="text" name="keyword" id="keyword" value="">
+                        <input type="text" name="keyword" id="keyword" value="{:input('keywords')}">
                         <div class="header-up-right-item-search-icon">
                         </div>
                     </div>
                 </li>
                 <li>
-                    <a href="">Abouts Us</a>
+                    <a href="{:cmf_url('portal/index/about')}">About</a>
                 </li>
                 <li>
-                    <a href="">Service</a>
+                    <a href="{:cmf_url('portal/index/service')}">Service</a>
                 </li>
                 <li>
-                    <a href="">Industries</a>
+                    <a href="{:cmf_url('portal/index/industries')}">Industries</a>
                 </li>
                 <li class="header-up-right-item header-up-right-item-whatsapp">
                     <a href="">{$site_info.whatsapp}</a>
@@ -27,7 +27,7 @@
                     <a href="">{$site_info.email}</a>
                 </li>
                 <li class="header-up-right-item header-up-right-item-lang">
-                    Language
+                    En
                     <div class="header-up-right-item-lang-dropdown-icon"></div>
                     <div class="header-up-right-item-lang-dropdown">
                         <div class="header-up-right-item-lang-dropdown-item">
@@ -73,10 +73,21 @@
                     </li>
                 </foreach>
             </ul>
-            <div class="header-down-right-quote"><a href="">Get a quote</a></div>
+            <div class="header-down-right-quote"><a href="{:cmf_url('portal/index/quote')}">Get a quote</a></div>
         </div>
 
     </div>
 </div>
-
+<script>
+    /**** 搜索 ***/
+    $('.header-up-right-item-search-icon').click(function (){
+        let keyword = $('#keyword').val();
+        if (!keyword || keyword == ''){
+            console.log('please input keywords');
+            return false;
+        }
+        let url = "{:cmf_url('portal/index/product')}?keywords="+keyword;
+        window.location.href=url
+    })
+</script>
 <!--NAV END-->

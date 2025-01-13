@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/products.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/product.js"></script>
+</head>
+<body>
+<div class="main">
+    <include file="public@nav"/>
+
+    <include file="public@banner"/>
+
+    <div class="main-content">
+
+        <!--select-->
+        <div class="products-content-select">
+            <div class="products-content_title">Products:</div>
+            <div class="product_select">
+                <select name="category_id" id="product_category">
+                    <option value="0" data-url="{:cmf_url('portal/index/product')}">All Products</option>
+                    <foreach name="category_list" item="vo">
+                        <option value="{$vo.id}" data-url="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}"
+                                {$vo['id']==$parent_id ? 'selected' : ''}>{$vo.name}</option>
+                    </foreach>
+                </select>
+            </div>
+
+            <div class="clear_both"></div>
+            <div class="product_industry">
+                <div class="product_industry_title">Industry Application:</div>
+                <ul class="product_industry_list clearfix">
+                    <foreach name="profession_list" item="vo">
+                        <li class="product_industry_list_item {$vo.checked ? 'active' : ''}" data-id="{$vo.id}">
+                            {$vo.name}
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+
+        <!--products-->
+        <div class="products-content">
+            <ul class="products-content-list">
+                <foreach name="list" item="vo">
+                    <li class="products-content-list-item" data-id="{$vo.id}">
+                        <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
+                            <div class="products-content-list-item-img">
+                                <img src="{:cmf_get_image_url($vo.thumbnail)}" alt="{$vo.title}">
+                            </div>
+                            <div class="products-content-list-item-title">{$vo.title}</div>
+                        </a>
+                        <div class="product_list_item_btn">
+                            <div class="product_list_item_btn_submit" id="inquiry">SUBMIT</div>
+                            <if condition="!empty($vo['file']) || !empty($product_setting['product_file'])">
+                                <div class="product_list_item_btn_download" id="download" data-href="{:empty($product.file) ? cmf_get_file_download_url($product_setting.product_file.url) : cmf_get_file_download_url($product.file.url)}">DOWNLOAD</div>
+                            </if>
+                        </div>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+        <div class="products-content-right-page">
+            <ul class="pagination">{$page}</ul>
+        </div>
+    </div>
+
+
+    <include file="public@foot"/>
+
+</div>
+</body>
+</html>
