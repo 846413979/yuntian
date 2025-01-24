@@ -79,7 +79,7 @@
  ***/
 .info_middle_box{
     width: 460px;
-    max-height: 579px;
+    /*max-height: 579px;*/
     /*overflow-y: auto;*/
     /*overflow-x: hidden;*/
     float: left;
@@ -324,11 +324,9 @@
     font-size: 20px;
     color: #333333;
     line-height: 30px;
-    height: 60px;
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .hot-products-list .product_item .product_list_item_category{
     font-family: Arial, Arial;

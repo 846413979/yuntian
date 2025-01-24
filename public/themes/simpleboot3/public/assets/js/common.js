@@ -89,10 +89,14 @@ $(document).ready(function(){
             alert('Please fill in all the information completely.');
             return;
         }
-        gtag('set', 'user_data', {
-            "email": email,
-            "phone_number": phone
-        });
+        if (typeof gtag === 'function') {
+            // 函数存在
+            gtag('set', 'user_data', {
+                "email": email,
+                "phone_number": phone
+            });
+        }
+
         let type = $('#feedback_type').val();
         let data = {
             name: name,

@@ -201,7 +201,7 @@ a:focus {
 
 .header .nav-sub {
     position: absolute;
-    top: 135px;
+    top: 130px;
     left: 0;
     width: 100%;
     color: #333;
@@ -379,6 +379,9 @@ a:focus {
         height: 30px;
         line-height: 30px;
         margin-top: 5px
+    }
+    .header .nav-sub{
+        top: 81px;
     }
     .header .nav-sub .nav-sub-ul li .nav-sub-title{
         font-size: 12px;

@@ -68,7 +68,7 @@
                 <li class="product_item">
                     <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
                         <div class="product_list_item_img">
-                            <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}">
+                            <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}" title="{$vo.title}">
                         </div>
                         <div class="product_list_item_title">{$vo.title}</div>
                     </a>

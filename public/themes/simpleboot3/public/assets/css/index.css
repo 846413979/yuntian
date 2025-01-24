@@ -105,6 +105,9 @@
     color: #333333;
     line-height: 30px;
     margin-top: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .hot-products .hot-products-list .hot-products-item .hot-products-item-desc{
     font-family: Arial, Arial;

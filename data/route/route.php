@@ -33,6 +33,8 @@ Route::get('Electric Hoists', 'portal/index/product?id=15')->append(array('id' =
 
 Route::get('Column Cantilever Crane, Wall Mounted Jib Crane, Wall travelling jib crane', 'portal/index/product?id=16')->append(array('id' => '16',));
 
+Route::get('RubberTyreContainerGantryCrane', 'portal/index/product?id=17')->append(array('id' => '17',));
+
 Route::get('High Temperature Gas Cooled Reactor Ground Ca', 'portal/index/product_info?id=1')->append(array('id' => '1',));
 
 Route::get('MarineCargoDeckCrane', 'portal/index/product_info?id=4')->append(array('id' => '4',));
